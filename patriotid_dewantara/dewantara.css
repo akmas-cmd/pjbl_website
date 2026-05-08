@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fffaf9;
+  color: #222;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.logo span {
+  color: #e60000;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #e60000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .login {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #e60000;
+  font-weight: 500;
+}
+
+.auth-buttons .daftar {
+  background-color: #e60000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.auth-buttons .login:hover {
+  background-color: #ddd;
+}
+
+.auth-buttons .daftar:hover {
+  color: #fff;
+  background-color: #b30000;
+}
+
+/* ===== Konten Utama ===== */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 60px 100px;
+}
+
+.text-section {
+  flex: 1;
+}
+
+.text-section h2 {
+  font-size: 32px;
+  color: #c60000;
+  margin-bottom: 20px;
+}
+
+.text-section h3 {
+  margin-top: 20px;
+  color: #b00000;
+  font-size: 20px;
+}
+
+.text-section p {
+  margin-top: 10px;
+  line-height: 1.7;
+  color: #444;
+  text-align: justify;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #c60000;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #a00000;
+}
+
+/* ===== Gambar Pahlawan ===== */
+.image-section img {
+  width: 340px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section img {
+    width: 80%;
+  }
+
+  .text-section {
+    text-align: left;
+  }
+}

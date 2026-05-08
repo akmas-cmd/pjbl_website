@@ -1,0 +1,173 @@
+<script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'patriot-red': '#CC0000', // Merah khas PatriotID
+                        'patriot-maroon': '#a02e2a', // Merah Marun untuk tombol
+                        'bg-gradient-start': '#FFF4F4', // Merah muda sangat muda
+                        'bg-gradient-end': '#FFFFFF', // Putih
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Gaya Kustom untuk Meniru Latar Belakang Gradien */
+        body {
+            background: linear-gradient(to bottom, #FFF4F4 0%, #FFFFFF 100%);
+            min-height: 100vh;
+        }
+
+        /* Gaya untuk Garis Timeline Vertikal (putus saat melewati teks) */
+        .timeline-line {
+            position: absolute;
+            left: 50%; /* Pusatkan garis di tengah halaman */
+            transform: translateX(-50%);
+            width: 0;
+            border-left: 3px dashed #000000;
+            height: 100%;
+            top: 0;
+            z-index: 5;
+        }
+
+        /* Gaya untuk Container Konten Timeline (agar konten berada di atas garis) */
+        .timeline-content-container {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- 1. Navbar / Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <!-- Logo PatriotID -->
+            <a href="#" class="flex items-center space-x-2">
+                <!-- Icon Elang Merah PatriotID (menggunakan SVG inline untuk kualitas) -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-patriot-red">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8 0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8z" fill="currentColor"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 7c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5S13.38 7 12 7zm0 8c-2.485 0-4.5 2.015-4.5 4.5 0 .276.224.5.5.5h8c.276 0 .5-.224.5-.5 0-2.485-2.015-4.5-4.5-4.5z" fill="currentColor"/>
+                    <path d="M14 12.5a2.5 2.5 0 01-5 0V9.5h5v3z" fill="#FFFFFF"/>
+                </svg>
+                <span class="text-lg font-bold text-gray-800">PATRIOTID</span>
+            </a>
+
+            <!-- Navigasi Utama (Hanya Tampilkan di Desktop) -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-sm font-semibold text-patriot-red border-b-2 border-patriot-red pb-1">Beranda</a>
+                <a href="#" class="text-sm font-medium text-gray-600 hover:text-patriot-red transition duration-150">Pahlawan</a>
+                <a href="#" class="text-sm font-medium text-gray-600 hover:text-patriot-red transition duration-150">Tempat Bersejarah</a>
+                <a href="#" class="text-sm font-medium text-gray-600 hover:text-patriot-red transition duration-150">Tragedi Bersejarah</a>
+            </nav>
+
+            <!-- Tombol Aksi -->
+            <div class="flex space-x-3">
+                <button 
+                    class="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 rounded-lg border border-gray-200 hover:bg-gray-200 transition duration-150 shadow-sm">
+                    Login
+                </button>
+                <button 
+                    class="px-4 py-2 text-sm font-semibold text-white bg-patriot-red rounded-lg hover:bg-patriot-maroon transition duration-150 shadow-md">
+                    Daftar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Konten Utama (Timeline) -->
+    <main class="max-w-4xl mx-auto pt-16 pb-32 px-4 sm:px-6 lg:px-8 relative timeline-content-container">
+        
+        <!-- Garis Timeline Vertikal Merah (Sekarang putus-putus) -->
+        <div class="timeline-line h-[calc(100%-80px)] top-10"></div>
+        
+        <!-- Timeline Item 1: Latar Belakang -->
+        <div class="text-center mb-24">
+            
+            <!-- Tahun / Label -->
+            <div class="inline-block px-3 py-1 mb-4 text-xs font-bold text-patriot-red border border-patriot-red rounded-full bg-white relative z-10 shadow-sm">
+                1945
+            </div>
+
+            <!-- Judul Besar -->
+            <h2 class="text-5xl font-bold text-gray-800 mb-6 tracking-tight leading-tight">
+                Latar Belakang
+            </h2>
+
+            <!-- Deskripsi Paragraf -->
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Pada Oktober 1945, pasukan Sekutu (tentara Inggris) tiba di Bandung 
+                dan menuntut agar senjata milik rakyat Indonesia diserahkan. Hal ini 
+                memicu perlawanan dari Tentara Keamanan Rakyat (TKR) dan para 
+                pejuang. Pertempuran pun pecah pada 21 November 1945, di mana para 
+                pejuang menyerang markas Sekutu di Bandung bagian utara.
+            </p>
+        </div>
+
+        <!-- Timeline Item 2: Konten Tambahan (Simulasi) -->
+        <div class="flex justify-center mb-24">
+             <div class="w-full max-w-2xl text-center">
+                <!-- Lingkaran Penanda di Garis Timeline -->
+                <div class="w-5 h-5 bg-white border-4 border-patriot-red rounded-full mx-auto relative z-10 -mb-2"></div>
+                
+                <!-- Konten Teks -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 mt-6">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-bold text-patriot-red border border-patriot-red rounded-full bg-white relative z-10 shadow-sm">
+                        24 November 1945
+                    </div>
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-3">Ultimatum Sekutu</h3>
+                    <p class="text-base text-gray-600 leading-relaxed">
+                        Sekutu mengeluarkan ultimatum agar seluruh pasukan Republik Indonesia 
+                        mengosongkan wilayah Bandung bagian utara. Ultimatum ini ditolak mentah-mentah 
+                        oleh pihak Indonesia.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timeline Item 3: Akhir (Simulasi) -->
+        <div class="flex justify-center mb-24">
+             <div class="w-full max-w-2xl text-center">
+                <!-- Lingkaran Penanda di Garis Timeline -->
+                <div class="w-5 h-5 bg-white border-4 border-patriot-red rounded-full mx-auto relative z-10 -mb-2"></div>
+                
+                <!-- Konten Teks -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 mt-6">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-bold text-patriot-red border border-patriot-red rounded-full bg-white relative z-10 shadow-sm">
+                        Maret 1946
+                    </div>
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-3">Bandung Lautan Api</h3>
+                    <p class="text-base text-gray-600 leading-relaxed">
+                        Peristiwa heroik pembakaran kota Bandung dalam strategi 'Bumi Hangus' 
+                        sebagai penolakan terhadap ultimatum Sekutu.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Penanda Akhir Timeline -->
+        <div class="flex justify-center">
+             <div class="w-5 h-5 bg-patriot-red rounded-full relative z-10"></div>
+        </div>
+
+    </main>
+
+    <!-- JavaScript (Tidak ada interaksi kompleks, tetapi ini adalah template JS) -->
+    <script>
+        // Logika JavaScript dapat ditambahkan di sini jika ada interaksi dinamis
+        console.log("Halaman PatriotID Beranda dimuat.");
+
+        // Contoh: Logika untuk menu mobile (jika ingin ditambahkan)
+        // const mobileMenuButton = document.getElementById('mobileMenuButton');
+        // mobileMenuButton.addEventListener('click', () => {
+        //     // Toggle menu mobile
+        // });
+    </script>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pahlawan</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --merah-indo: #CE1126;
+            --merah-muda: #fff0f0;
+            --putih: #ffffff;
+            --abu-bg: #f8f9fa;
+            --teks-utama: #333333;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--abu-bg);
+            overflow-x: hidden;
+            color: var(--teks-utama);
+        }
+
+        /* SIDEBAR */
+        #sidebar-wrapper {
+            min-height: 100vh;
+            width: var(--sidebar-width);
+            background-color: var(--putih);
+            border-right: 4px solid var(--merah-indo);
+            transition: transform 0.3s ease;
+            position: fixed;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            top: 0;
+            left: 0;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+            padding: 1.5rem;
+            font-size: 1.4rem;
+            color: var(--merah-indo);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+
+        .list-group-item-sidebar {
+            background-color: transparent;
+            color: var(--teks-utama);
+            border: none;
+            padding: 1rem 1.5rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+        }
+
+        .list-group-item-sidebar:hover {
+            background-color: var(--merah-muda);
+            color: var(--merah-indo);
+            padding-left: 1.8rem;
+        }
+
+        .list-group-item-sidebar.active {
+            background-color: var(--merah-muda);
+            color: var(--merah-indo);
+            font-weight: 600;
+            border-left: 5px solid var(--merah-indo);
+        }
+
+        /* CONTENT */
+        #page-content-wrapper {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            transition: margin 0.3s ease;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        .top-navbar {
+            background: white;
+            border-bottom: 2px solid var(--merah-indo);
+            padding: 1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* CARDS */
+        .card-stat {
+            border-left: 4px solid var(--merah-indo);
+            transition: transform 0.2s;
+        }
+
+        .card-stat:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-merah {
+            background-color: var(--merah-indo);
+            color: white;
+            border: none;
+        }
+
+        .btn-merah:hover {
+            background-color: #a80f21;
+            color: white;
+        }
+
+        /* SECTIONS */
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+            animation: fadeIn 0.4s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE - TABLET */
+        @media (max-width: 1024px) {
+            :root {
+                --sidebar-width: 220px;
+            }
+
+            #sidebar-wrapper .sidebar-heading {
+                font-size: 1.2rem;
+                padding: 1.2rem;
+            }
+
+            .list-group-item-sidebar {
+                padding: 0.9rem 1.2rem;
+                font-size: 14px;
+            }
+        }
+
+        /* RESPONSIVE - MOBILE & TABLET */
+        @media (max-width: 768px) {
+            #sidebar-wrapper {
+                transform: translateX(-100%);
+            }
+
+            body.sidebar-open #sidebar-wrapper {
+                transform: translateX(0);
+            }
+
+            body.sidebar-open::after {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            #page-content-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .top-navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .container-fluid {
+                padding: 1rem !important;
+            }
+
+            /* Hide desktop text on mobile */
+            .d-none.d-md-block {
+                display: none !important;
+            }
+
+            .d-none.d-sm-inline {
+                display: none !important;
+            }
+
+            /* Stack cards vertically */
+            .col-lg-3, .col-lg-6, .col-md-6 {
+                margin-bottom: 1rem;
+            }
+
+            /* Responsive table */
+            .table-responsive {
+                font-size: 14px;
+            }
+
+            .table td, .table th {
+                padding: 0.5rem;
+            }
+
+            /* Smaller buttons on mobile */
+            .btn-sm {
+                padding: 0.25rem 0.5rem;
+                font-size: 12px;
+            }
+        }
+
+        /* MOBILE SMALL */
+        @media (max-width: 480px) {
+            #sidebar-wrapper {
+                width: 80%;
+                max-width: 280px;
+            }
+
+            .sidebar-heading {
+                font-size: 1.1rem !important;
+                padding: 1rem !important;
+            }
+
+            .list-group-item-sidebar {
+                padding: 0.8rem 1rem;
+                font-size: 13px;
+            }
+
+            .top-navbar h5 {
+                font-size: 1rem;
+            }
+
+            .card-stat h3 {
+                font-size: 1.5rem;
+            }
+
+            .table-responsive {
+                font-size: 12px;
+            }
+
+            .btn {
+                font-size: 12px;
+            }
+        }
+
+        /* LANDSCAPE TABLET */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            #sidebar-wrapper {
+                width: 200px;
+            }
+
+            .list-group-item-sidebar {
+                padding: 0.7rem 1rem;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar-wrapper">
+        <div class="sidebar-heading fw-bold">
+            <i class="fas fa-monument me-2"></i> NUSANTARA
+        </div>
+        <div class="list-group list-group-flush mt-3">
+            <a onclick="showSection('dashboard', this)" class="list-group-item-sidebar active">
+                <i class="fas fa-th-large me-2"></i> Dashboard Utama
+            </a>
+            <a onclick="showSection('pahlawan', this)" class="list-group-item-sidebar">
+                <i class="fas fa-users me-2"></i> Data Pahlawan
+            </a>
+            <a onclick="showSection('arsip', this)" class="list-group-item-sidebar">
+                <i class="fas fa-book-open me-2"></i> Arsip Sejarah
+            </a>
+            <a href="../patriotid_landingpage/landingpage.html" class="list-group-item-sidebar mt-5">
+                <i class="fas fa-sign-out-alt me-2"></i> Keluar
+            </a>
+        </div>
+    </div>
+
+    <div id="page-content-wrapper">
+        <nav class="top-navbar d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-outline-danger btn-sm me-3" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h5 class="m-0 text-danger d-none d-md-block" id="page-title">Dashboard Utama</h5>
+            </div>
+            
+            <div class="d-flex align-items-center">
+                <span class="text-dark me-3 d-none d-sm-inline">Admin RI</span>
+                <button class="btn btn-merah btn-sm">
+                    <i class="fas fa-bell"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container-fluid px-4 py-4">
+
+            <div id="dashboard" class="section-content active">
+                <h2 class="text-danger fw-bold mb-4">Ringkasan Utama</h2>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="card card-stat bg-white p-3 shadow-sm h-100">
+                            <div>
+                                <p class="text-muted small mb-1">TOTAL PAHLAWAN</p>
+                                <h3 class="fw-bold mb-0 text-dark">192</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="card card-stat bg-white p-3 shadow-sm h-100">
+                            <div>
+                                <p class="text-muted small mb-1">ARSIP DIGITAL</p>
+                                <h3 class="fw-bold mb-0 text-dark">1,450</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="card bg-danger text-white p-3 shadow-sm h-100">
+                            <h5 class="mb-1 fw-bold">"Merdeka atau Mati!"</h5>
+                            <p class="small opacity-75 mb-0">Semangat Pahlawan Nasional.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-danger text-white py-3">
+                        <h5 class="mb-0 fw-bold">Aktivitas Terkini</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Waktu</th>
+                                        <th>Aktivitas</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>10:00 WIB</td>
+                                        <td>Menambah data Cut Nyak Dien</td>
+                                        <td><span class="badge bg-success">Selesai</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>09:30 WIB</td>
+                                        <td>Verifikasi foto Jenderal Sudirman</td>
+                                        <td><span class="badge bg-warning text-dark">Menunggu</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pahlawan" class="section-content">
+                <h2 class="text-danger fw-bold mb-4">Daftar Pahlawan Nusantara</h2>
+                
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-danger text-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold">Data Lengkap</h5>
+                        <button class="btn btn-light text-danger btn-sm border border-danger">Tambah Data</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Asal</th>
+                                        <th>Era</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Ir. Soekarno</td>
+                                        <td>Jawa Timur</td>
+                                        <td>Proklamasi</td>
+                                        <td><button class="btn btn-sm btn-outline-danger">Lihat</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">P. Diponegoro</td>
+                                        <td>Yogyakarta</td>
+                                        <td>Perang Jawa</td>
+                                        <td><button class="btn btn-sm btn-outline-danger">Lihat</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="arsip" class="section-content">
+                <h2 class="text-danger fw-bold mb-4">Arsip Digital & Dokumen Penting</h2>
+                
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card shadow-sm h-100 p-3">
+                            <i class="fas fa-file-pdf fa-2x text-danger mb-2"></i>
+                            <h6 class="fw-bold">Dokumen Proklamasi</h6>
+                            <p class="small text-muted mb-0">PDF | 1.2 MB</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card shadow-sm h-100 p-3">
+                            <i class="fas fa-file-image fa-2x text-danger mb-2"></i>
+                            <h6 class="fw-bold">Foto Konferensi Meja Bundar</h6>
+                            <p class="small text-muted mb-0">JPG | 800 KB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Toggle Sidebar
+        const toggleButton = document.getElementById("menu-toggle");
+        
+        toggleButton.addEventListener('click', function() {
+            document.body.classList.toggle('sidebar-open');
+        });
+
+        // Close sidebar when clicking overlay (mobile)
+        document.body.addEventListener('click', function(e) {
+            if (document.body.classList.contains('sidebar-open') && 
+                !document.getElementById('sidebar-wrapper').contains(e.target) &&
+                e.target !== toggleButton && 
+                !toggleButton.contains(e.target)) {
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+
+        // Navigation Logic
+        function showSection(sectionId, element) {
+            // Update page visibility
+            document.querySelectorAll('.section-content').forEach(div => {
+                div.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active sidebar item
+            if(element) {
+                document.querySelectorAll('.list-group-item-sidebar').forEach(item => {
+                    item.classList.remove('active');
+                });
+                element.classList.add('active');
+
+                // Update navbar title
+                const titleMap = {
+                    'dashboard': 'Dashboard Utama',
+                    'pahlawan': 'Data Pahlawan',
+                    'arsip': 'Arsip Sejarah'
+                };
+                document.getElementById('page-title').innerText = titleMap[sectionId];
+            }
+
+            // Close sidebar on mobile after selecting
+            if (window.innerWidth <= 768) {
+                document.body.classList.remove('sidebar-open');
+            }
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+    </script>
+</body>
+</html>

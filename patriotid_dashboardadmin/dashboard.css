@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    display: flex;
+    background: #f7f7f7;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background: white;
+    padding: 40px 20px;
+    height: 100vh;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+}
+
+.logo {
+    color: #c40000;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: black;
+}
+
+.sidebar ul {
+    list-style: none;
+    margin-top: 40px;
+}
+
+.sidebar ul li {
+    padding: 12px 0;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover {
+    color: #c40000;
+}
+
+/* Main */
+.main {
+    flex: 1;
+    padding: 40px;
+}
+
+.main h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* Welcome Card */
+.welcome-card {
+    background: #8b0000;
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-card .text h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.welcome-card button {
+    margin-top: 15px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    color: #8b0000;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.illustration img {
+    width: 150px;
+}
+
+/* Favorite Card */
+.favorite-card {
+    margin-top: 30px;
+    background: linear-gradient(#7a0000, #300000);
+    padding: 25px;
+    border-radius: 15px;
+    color: white;
+}
+
+.favorite-card h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.fav-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 30px;
+    margin-bottom: 12px;
+}
+
+.fav-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}

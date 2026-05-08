@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | PatriotID</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Bagian kiri -->
+    <div class="left-section">
+      <img src="../garuda.png" alt="Garuda Pancasila" class="garuda">
+    </div>
+
+    <!-- Bagian kanan -->
+    <div class="right-section">
+      <div class="form-box">
+        <img src="../logo.png" alt="Logo PatriotID" class="logo">
+        <h2>Login</h2>
+        <p>Selamat Datang di PatriotID</p>
+
+        <form>
+          <div class="input-group">
+            <label for="email">Email atau Nomor Telepon</label>
+            <input type="text" id="email" placeholder="Masukkan email atau nomor telepon">
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Masukkan password">
+          </div>
+
+          <a href="#" class="forgot">Lupa Password?</a>
+
+          <button type="button" class="btn-login" onclick="location.href='../patriotid_landingpage/landingpage.html'">Login</button>
+
+          <div class="social-login">
+            <button class="btn-google">Daftar Dengan Google</button>
+            <button class="btn-facebook">Daftar Dengan Facebook</button>
+          </div>
+
+          <p class="register-link">
+            Belum punya akun? <a href="../patriotid_daftar/daftar.html">Daftar</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
