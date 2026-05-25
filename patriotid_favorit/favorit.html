@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favorit Saya | PatriotID</title>
+  <link rel="stylesheet" href="favorit.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">
+      <img src="../logo.png" alt="Logo PatriotID">
+      <h1>Patriot<span>ID</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../patriotid_landingpage/landingpage.html#beranda">Beranda</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#profil">Pahlawan</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tempat">Tempat</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tragedi">Tragedi</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="../patriotid_login/login.php" class="login">Login</a>
+      <a href="../patriotid_daftar/daftar.html" class="daftar">Daftar</a>
+    </div>
+  </header>
+
+  <section class="page-header">
+    <h2>Favorit <span>Saya</span></h2>
+    <p>Koleksi pahlawan, tempat bersejarah, dan tragedi bersejarah yang kamu simpan.</p>
+    <a href="../patriotid_landingpage/landingpage.html" class="back-btn">← Kembali ke Beranda</a>
+  </section>
+
+  <main class="main-content">
+
+    <div class="filter-tabs">
+      <button class="tab-btn active" data-filter="semua" onclick="filterFavorit('semua', this)">
+        Semua <span class="tab-count" id="count-semua">0</span>
+      </button>
+      <button class="tab-btn" data-filter="pahlawan" onclick="filterFavorit('pahlawan', this)">
+        Pahlawan <span class="tab-count" id="count-pahlawan">0</span>
+      </button>
+      <button class="tab-btn" data-filter="tempat" onclick="filterFavorit('tempat', this)">
+        Tempat Bersejarah <span class="tab-count" id="count-tempat">0</span>
+      </button>
+      <button class="tab-btn" data-filter="tragedi" onclick="filterFavorit('tragedi', this)">
+        Tragedi Bersejarah <span class="tab-count" id="count-tragedi">0</span>
+      </button>
+    </div>
+
+    <div class="favorites-grid" id="favorites-grid">
+      <div class="empty-state" id="empty-state" style="display:flex;">
+        <div class="empty-icon">🤍</div>
+        <h3>Belum ada favorit</h3>
+        <p>Kamu belum menambahkan apapun ke daftar favorit. Yuk, jelajahi konten PatriotID!</p>
+        <a href="../patriotid_landingpage/landingpage.html" class="btn-explore">Jelajahi Sekarang</a>
+      </div>
+    </div>
+
+  </main>
+
+  <div class="toast" id="toast">
+    <span id="toast-icon">❤️</span>
+    <span id="toast-msg">Dihapus dari favorit</span>
+  </div>
+
+  <script>
+    const KONTEN = {
+      soekarno: {
+        kategori: 'pahlawan',
+        nama: 'Ir. Soekarno',
+        sub: 'Proklamator & Presiden Pertama RI',
+        img: '../soekarno-profil.png',
+        href: '../patriotid_soekarno/soekarno.html'
+      },
+      sudirman: {
+        kategori: 'pahlawan',
+        nama: 'Jendral Sudirman',
+        sub: 'Panglima Besar TNI',
+        img: '../sudirman-profil.png',
+        href: '../patriotid_sudirman/sudirman.html'
+      },
+      kartini: {
+        kategori: 'pahlawan',
+        nama: 'R.A. Kartini',
+        sub: 'Pejuang Emansipasi Wanita',
+        img: '../kartini-profil.png',
+        href: '../patriotid_kartini/kartini.html'
+      },
+      dewantara: {
+        kategori: 'pahlawan',
+        nama: 'Ki Hadjar Dewantara',
+        sub: 'Bapak Pendidikan Nasional',
+        img: '../dewantara-profil.png',
+        href: '../patriotid_dewantara/dewantara.html'
+      },
+      diponegoro: {
+        kategori: 'pahlawan',
+        nama: 'Pangeran Diponegoro',
+        sub: 'Pahlawan Perang Jawa',
+        img: '../diponegoro-profil.png',
+        href: '../patriotid_diponegoro/diponegoro.html'
+      },
+      pattimura: {
+        kategori: 'pahlawan',
+        nama: 'Kapitan Pattimura',
+        sub: 'Pahlawan dari Maluku',
+        img: '../pattimura-profil.png',
+        href: '../patriotid_pattimura/pattimura.html'
+      },
+      borobudur: {
+        kategori: 'tempat',
+        nama: 'Candi Borobudur',
+        sub: 'Magelang, Jawa Tengah',
+        img: '../borobudur.png',
+        href: '../patriotid_borobudur/borobudur.html'
+      },
+      monas: {
+        kategori: 'tempat',
+        nama: 'Monumen Nasional',
+        sub: 'Jakarta Pusat',
+        img: '../monas.png',
+        href: '#'
+      },
+      kotaTua: {
+        kategori: 'tempat',
+        nama: 'Kota Tua Jakarta',
+        sub: 'Jakarta Barat',
+        img: '../kota-tua.png',
+        href: '#'
+      },
+      prambanan: {
+        kategori: 'tempat',
+        nama: 'Candi Prambanan',
+        sub: 'Sleman, Yogyakarta',
+        img: '../prambanan.png',
+        href: '#'
+      },
+      tamanSari: {
+        kategori: 'tempat',
+        nama: 'Taman Sari',
+        sub: 'Yogyakarta',
+        img: '../taman-sari.png',
+        href: '#'
+      },
+      pki: {
+        kategori: 'tragedi',
+        nama: 'Gerakan 30 September (G30S/PKI)',
+        sub: 'Jakarta, 30 September 1965',
+        img: '../pki.png',
+        href: '../patriotid_pki/pki.html'
+      },
+      trisakti: {
+        kategori: 'tragedi',
+        nama: 'Tragedi Trisakti',
+        sub: 'Jakarta, 12 Mei 1998',
+        img: '../trisakti.png',
+        href: '#'
+      },
+      lautanApi: {
+        kategori: 'tragedi',
+        nama: 'Bandung Lautan Api',
+        sub: 'Bandung, 24 Maret 1946',
+        img: '../lautanapi.png',
+        href: '#'
+      }
+    };
+
+    const STORAGE_KEY = 'patriotid_favorit';
+
+    function getFavorit() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch { return []; }
+    }
+
+    function saveFavorit(list) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+
+    function toggleFavorit(id) {
+      let list = getFavorit();
+      const idx = list.indexOf(id);
+      if (idx === -1) {
+        list.push(id);
+        tampilToast('❤️', 'Ditambahkan ke favorit!');
+      } else {
+        list.splice(idx, 1);
+        tampilToast('🗑️', 'Dihapus dari favorit');
+      }
+      saveFavorit(list);
+      updateTombolFavorit(id);
+    }
+
+    function isFavorit(id) {
+      return getFavorit().includes(id);
+    }
+
+    function updateTombolFavorit(id) {
+      const btn = document.getElementById('btn-fav-' + id);
+      if (!btn) return;
+      const aktif = isFavorit(id);
+      btn.classList.toggle('aktif', aktif);
+      btn.title = aktif ? 'Hapus dari Favorit' : 'Simpan ke Favorit';
+    }
+
+    let filterAktif = 'semua';
+
+    function renderKartu() {
+      const list = getFavorit();
+      const grid = document.getElementById('favorites-grid');
+      const emptyState = document.getElementById('empty-state');
+
+      const counts = { semua: 0, pahlawan: 0, tempat: 0, tragedi: 0 };
+      list.forEach(id => {
+        const k = KONTEN[id];
+        if (!k) return;
+        counts.semua++;
+        counts[k.kategori]++;
+      });
+
+      ['semua', 'pahlawan', 'tempat', 'tragedi'].forEach(k => {
+        const el = document.getElementById('count-' + k);
+        if (el) el.textContent = counts[k];
+      });
+
+      const tampil = list.filter(id => {
+        const k = KONTEN[id];
+        if (!k) return false;
+        return filterAktif === 'semua' || k.kategori === filterAktif;
+      });
+
+      Array.from(grid.querySelectorAll('.fav-card')).forEach(el => el.remove());
+
+      if (tampil.length === 0) {
+        emptyState.style.display = 'flex';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+
+      tampil.forEach(id => {
+        const k = KONTEN[id];
+        if (!k) return;
+
+        const labelBadge = { pahlawan: 'Pahlawan', tempat: 'Tempat', tragedi: 'Tragedi' };
+        const classBadge = { pahlawan: 'badge-pahlawan', tempat: 'badge-tempat', tragedi: 'badge-tragedi' };
+
+        const card = document.createElement('div');
+        card.className = `fav-card type-${k.kategori}`;
+        card.innerHTML = `
+          <span class="badge ${classBadge[k.kategori]}">${labelBadge[k.kategori]}</span>
+          <button class="btn-unfav" onclick="hapusFavorit('${id}')" title="Hapus dari favorit">❤️</button>
+          <img class="card-img" src="${k.img}" alt="${k.nama}" onerror="this.style.background='#f5e8e8';this.style.minHeight='180px';">
+          <div class="card-body">
+            <h3>${k.nama}</h3>
+            <p>${k.sub}</p>
+            <a href="${k.href}" class="btn-detail">Lihat Detail →</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function hapusFavorit(id) {
+      let list = getFavorit();
+      list = list.filter(x => x !== id);
+      saveFavorit(list);
+      renderKartu();
+      tampilToast('🗑️', 'Dihapus dari favorit');
+    }
+
+    function filterFavorit(filter, btn) {
+      filterAktif = filter;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderKartu();
+    }
+
+    let toastTimer = null;
+
+    function tampilToast(icon, pesan) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-icon').textContent = icon;
+      document.getElementById('toast-msg').textContent = pesan;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    document.addEventListener('DOMContentLoaded', renderKartu);
+  </script>
+
+</body>
+</html>

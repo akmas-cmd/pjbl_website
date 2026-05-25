@@ -1,0 +1,6060 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+aaaa/aaaa.css
+aaaa/aaaa.html
+bb/bb.css
+bb/bb.html
+borobudur-2.png
+borobudur-3.png
+borobudur.png
+bytesize_book (1).png
+dashboard2/dashboard2.html
+dashboard2/Dashboard3.css
+dashboard2/Dashboard3.html
+dewantara-2.png
+dewantara-profil.png
+diponegoro-2.png
+diponegoro-profil.png
+garuda.png
+Group 107259.png
+icon-cable.png
+icon-edukasi.png
+icon-patriotisme.png
+icon-sejarah.png
+includes/auth.php
+includes/koneksi.php
+jfhngu.html
+kartini-2.png
+kartini-profil.png
+kota-tua.png
+lautanapi.png
+logo.png
+monas.png
+patriotid_borobudur/borobudur.css
+patriotid_borobudur/borobudur.html
+patriotid_daftar/daftar.css
+patriotid_daftar/daftar.html
+patriotid_dashboardadmin/dashboard.css
+patriotid_dashboardadmin/dashboard.html
+patriotid_dashboardadmin/data_pahlawan.css
+patriotid_dashboardadmin/data_pahlawan.html
+patriotid_dashboardadmin/profil.css
+patriotid_dashboardadmin/profil.html
+patriotid_dewantara/dewantara.css
+patriotid_dewantara/dewantara.html
+patriotid_diponegoro/diponegoro.css
+patriotid_diponegoro/diponegoro.html
+patriotid_kartini/kartini.css
+patriotid_kartini/kartini.html
+patriotid_landingpage/landingpage.css
+patriotid_landingpage/landingpage.html
+patriotid_login/login.css
+patriotid_login/login.php
+patriotid_logo.png
+patriotid_logout/logout.php
+patriotid_pattimura/pattimura.css
+patriotid_pattimura/pattimura.html
+patriotid_pki/pki.css
+patriotid_pki/pki.html
+patriotid_soekarno/soekarno.css
+patriotid_soekarno/soekarno.html
+patriotid_sudirman/sudirman.css
+patriotid_sudirman/sudirman.html
+pattimura-2.png
+pattimura-profil.png
+patung.png
+peta-indonesia.png
+pki.png
+prambanan.png
+README.md
+soekarno-2.png
+soekarno-profil.png
+soekarno.png
+sudirman-2.png
+sudirman-profil.png
+taman-sari.png
+trisakti.png
+unnamed 3.png
+unsplash_9yIg3rV6sDM.png
+unsplash_cevvKp62fAI.png
+unsplash_esSYEOq4s9U.png
+unsplash_nU3SamoqWFE.png
+unsplash_xYhYTGP2tjQ.png
+unsplash_Yv8QVuRoXfQ.png
+unsplash_z90p_P7_OpI.png
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="includes/auth.php">
+<?php
+// ============================================================
+//  PATRIOTID — Auth Helper
+//  Include di halaman yang hanya boleh diakses setelah login.
+//  Contoh pemakaian: require_once '../includes/auth.php';
+// ============================================================
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../patriotid_login/login.php');
+    exit;
+}
+
+// Variabel siap pakai di semua halaman yang include file ini
+$user_id   = $_SESSION['user_id'];
+$user_nama = $_SESSION['user_nama'];
+$user_role = $_SESSION['user_role'];
+</file>
+
+<file path="includes/koneksi.php">
+<?php
+// ============================================================
+//  PATRIOTID — Koneksi Database
+//  File ini di-include di semua halaman yang butuh database.
+//  Letakkan file ini di folder: patriotid/includes/koneksi.php
+// ============================================================
+
+$host   = 'localhost';
+$dbname = 'patriotid_db';
+$user   = 'root';
+$pass   = '';           // Kosong = default XAMPP, ganti jika kamu set password
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("<p style='color:red;font-family:sans-serif;padding:20px'>
+        <strong>Koneksi database gagal!</strong><br>
+        Pastikan XAMPP sudah aktif dan database <em>patriotid_db</em> sudah dibuat.<br><br>
+        Error: " . $e->getMessage() . "
+    </p>");
+}
+</file>
+
+<file path="patriotid_daftar/daftar.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  width: 90%;
+  max-width: 1100px;
+  height: 600px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== Bagian kiri ===== */
+.left-section {
+  flex: 1;
+  background: linear-gradient(180deg, #800000, #400000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.garuda {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+/* ===== Bagian kanan ===== */
+.right-section {
+  flex: 1;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-box {
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.logo {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 28px;
+  color: #000;
+}
+
+p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* ===== Input ===== */
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.forgot {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  color: #a00000;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+/* ===== Tombol login ===== */
+.btn-login {
+  background-color: #800000;
+  color: #fff;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.btn-login:hover {
+  background-color: #a00000;
+}
+
+/* ===== Login sosial ===== */
+.social-login {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-google, .btn-facebook {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-google:hover, .btn-facebook:hover {
+  background-color: #f5f5f5;
+}
+
+/* ===== Link daftar ===== */
+.register-link {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #a00000;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Responsif ===== */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-section {
+    height: 250px;
+  }
+
+  .garuda {
+    width: 40%;
+  }
+}
+</file>
+
+<file path="patriotid_daftar/daftar.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar | PatriotID</title>
+  <link rel="stylesheet" href="daftar.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Bagian kiri -->
+    <div class="left-section">
+      <img src="../garuda.png" alt="Garuda Pancasila" class="garuda">
+    </div>
+
+    <!-- Bagian kanan -->
+    <div class="right-section">
+      <div class="form-box">
+        <img src="../logo.png" alt="Logo PatriotID" class="logo">
+        <h2>Daftar</h2>
+        <p>Selamat Datang di PatriotID</p>
+
+        <form>
+          <div class="input-group">
+            <label for="email">Email atau Nomor Telepon</label>
+            <input type="text" id="email" placeholder="Masukkan email atau nomor telepon">
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Masukkan password">
+          </div>
+
+          <a href="#" class="forgot">Lupa Password?</a>
+
+          <button type="button" class="btn-login" onclick="location.href='../patriotid_landingpage/landingpage.html'">Daftar</button>
+
+          <div class="social-login">
+            <button class="btn-google">Daftar Dengan Google</button>
+            <button class="btn-facebook">Daftar Dengan Facebook</button>
+          </div>
+
+          <p class="register-link">
+            Belum punya akun? <a href="../patriotid_daftar/daftar.html">Daftar</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+</file>
+
+<file path="patriotid_dashboardadmin/data_pahlawan.css">
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f0;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 180px;
+  background: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 28px;
+}
+
+.logo img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #8B1010;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.logo-text span {
+  color: #222222;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: block;
+  padding: 11px 16px;
+  font-size: 13px;
+  color: #444444;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-item:hover {
+  background: #fdf0f0;
+  color: #8B1010;
+}
+
+.nav-item.active {
+  color: #8B1010;
+  font-weight: 600;
+  border-left-color: #8B1010;
+  background: #fdf0f0;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  flex: 1;
+  padding: 32px 36px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222222;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8B1010;
+  margin-bottom: 16px;
+}
+
+/* ── STAT CARDS ── */
+.cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.8fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 18px 22px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #888888;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #222222;
+}
+
+.quote-card {
+  background: #8B1010;
+  border-radius: 10px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.quote-sub {
+  font-size: 12px;
+  color: #e8b0b0;
+}
+
+/* ── ONLINE USERS ── */
+.online-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.online-header {
+  background: #8B1010;
+  padding: 11px 18px;
+}
+
+.online-header-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  border-bottom: 1px solid #f2f2f2;
+  transition: background 0.12s;
+}
+
+.user-row:last-child {
+  border-bottom: none;
+}
+
+.user-row:hover {
+  background: #fafafa;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot.online {
+  background: #27ae60;
+  box-shadow: 0 0 0 2px #d4f5e2;
+}
+
+.dot.offline {
+  background: #e74c3c;
+  box-shadow: 0 0 0 2px #fde0dd;
+}
+
+.user-name {
+  font-size: 13.5px;
+  color: #333333;
+}
+
+.user-name strong {
+  font-weight: 600;
+  color: #111111;
+}
+
+/* ══════════════════════════════
+   DATA PAHLAWAN PAGE
+══════════════════════════════ */
+
+.table-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-header {
+  background: #8B1010;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-header-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.btn-tambah {
+  background: #ffffff;
+  color: #8B1010;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-tambah:hover {
+  background: #f5e0e0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead tr {
+  background: #fdf5f5;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.data-table thead th {
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444444;
+  text-align: left;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid #f2f2f2;
+  transition: background 0.12s;
+}
+
+.data-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.data-table tbody td {
+  padding: 13px 18px;
+  font-size: 13.5px;
+  color: #333333;
+  min-height: 44px;
+  height: 44px;
+}
+
+.btn-lihat {
+  background: #8B1010;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-lihat:hover {
+  background: #6e0d0d;
+}
+</file>
+
+<file path="patriotid_dashboardadmin/data_pahlawan.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PatriotID - Data Pahlawan</title>
+  <link rel="stylesheet" href="data_pahlawan.css" />
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="assets/logo.png" alt="PatriotID Logo" />
+      <span class="logo-text">PATRIOT<span>ID</span></span>
+    </div>
+    <nav>
+      <a href="dashboard.html" class="nav-item">Dashboard utama</a>
+      <a href="data_pahlawan.html" class="nav-item active">Data Pahlawan</a>
+      <a href="#" class="nav-item">Profil</a>
+      <a href="#" class="nav-item">Keluar</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <h1 class="page-title">Data Pahlawan</h1>
+    <h2 class="section-title">Daftar Pahlawan Nusantara</h2>
+
+    <div class="table-card">
+      <div class="table-header">
+        <span class="table-header-text">Data Lengkap</span>
+        <button class="btn-tambah">Tambah Data</button>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Asal</th>
+            <th>Era</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ir. Soekarno</td>
+            <td>Jawa Timur</td>
+            <td>Proklamasi</td>
+            <td><button class="btn-lihat">Lihat</button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+</body>
+</html>
+</file>
+
+<file path="patriotid_dashboardadmin/profil.css">
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f0;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 180px;
+  background: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 28px;
+}
+
+.logo img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #8B1010;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.logo-text span {
+  color: #222222;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: block;
+  padding: 11px 16px;
+  font-size: 13px;
+  color: #444444;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-item:hover {
+  background: #fdf0f0;
+  color: #8B1010;
+}
+
+.nav-item.active {
+  color: #8B1010;
+  font-weight: 600;
+  border-left-color: #8B1010;
+  background: #fdf0f0;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  flex: 1;
+  padding: 32px 36px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222222;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8B1010;
+  margin-bottom: 16px;
+}
+
+/* ── STAT CARDS ── */
+.cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.8fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 18px 22px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #888888;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #222222;
+}
+
+.quote-card {
+  background: #8B1010;
+  border-radius: 10px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.quote-sub {
+  font-size: 12px;
+  color: #e8b0b0;
+}
+
+/* ── ONLINE USERS ── */
+.online-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.online-header {
+  background: #8B1010;
+  padding: 11px 18px;
+}
+
+.online-header-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  border-bottom: 1px solid #f2f2f2;
+  transition: background 0.12s;
+}
+
+.user-row:last-child {
+  border-bottom: none;
+}
+
+.user-row:hover {
+  background: #fafafa;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot.online {
+  background: #27ae60;
+  box-shadow: 0 0 0 2px #d4f5e2;
+}
+
+.dot.offline {
+  background: #e74c3c;
+  box-shadow: 0 0 0 2px #fde0dd;
+}
+
+.user-name {
+  font-size: 13.5px;
+  color: #333333;
+}
+
+.user-name strong {
+  font-weight: 600;
+  color: #111111;
+}
+
+/* ══════════════════════════════
+   DATA PAHLAWAN PAGE
+══════════════════════════════ */
+
+.table-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-header {
+  background: #8B1010;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-header-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.btn-tambah {
+  background: #ffffff;
+  color: #8B1010;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-tambah:hover {
+  background: #f5e0e0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead tr {
+  background: #fdf5f5;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.data-table thead th {
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444444;
+  text-align: left;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid #f2f2f2;
+  transition: background 0.12s;
+}
+
+.data-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.data-table tbody td {
+  padding: 13px 18px;
+  font-size: 13.5px;
+  color: #333333;
+  min-height: 44px;
+  height: 44px;
+}
+
+.btn-lihat {
+  background: #8B1010;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-lihat:hover {
+  background: #6e0d0d;
+}
+
+/* ══════════════════════════════
+   PROFIL PAGE
+══════════════════════════════ */
+
+.profil-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 1200px;
+}
+
+.profil-card-header {
+  background: #8B1010;
+  padding: 22px 18px;
+  text-align: center;
+}
+
+.profil-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.profil-card-body {
+  background: #f9f5f5;
+  padding: 24px 32px 32px;
+}
+
+.avatar-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.avatar-label {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+}
+
+.avatar-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatar-fallback {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #d0cccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.avatar-label:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #222222;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-input:focus {
+  border-color: #8B1010;
+}
+
+.form-hint {
+  font-size: 12px;
+  color: #999999;
+  margin-top: 5px;
+}
+
+.link-ubah {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8B1010;
+  text-decoration: none;
+}
+
+.link-ubah:hover {
+  text-decoration: underline;
+}
+</file>
+
+<file path="patriotid_dashboardadmin/profil.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PatriotID - Profil</title>
+  <link rel="stylesheet" href="profil.css" />
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="assets/logo.png" alt="PatriotID Logo" />
+      <span class="logo-text">PATRIOT<span>ID</span></span>
+    </div>
+    <nav>
+      <a href="dashboard.html" class="nav-item">Dashboard utama</a>
+      <a href="data_pahlawan.html" class="nav-item">Data Pahlawan</a>
+      <a href="profil.html" class="nav-item active">Profil</a>
+      <a href="#" class="nav-item">Keluar</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <h1 class="page-title">Profil</h1>
+
+    <div class="profil-card">
+      <!-- Header merah -->
+      <div class="profil-card-header">
+        <h2 class="profil-card-title">Data Akun</h2>
+      </div>
+
+      <!-- Body form -->
+      <div class="profil-card-body">
+        <!-- Avatar -->
+        <div class="avatar-wrapper">
+          <label for="avatar-input" class="avatar-label">
+            <img src="assets/avatar.png" alt="Foto Profil" class="avatar-img"
+                 onerror="this.src=''; this.style.display='none'; this.parentElement.querySelector('.avatar-fallback').style.display='flex';" />
+            <div class="avatar-fallback">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+              </svg>
+            </div>
+            <div class="avatar-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </div>
+          </label>
+          <input type="file" id="avatar-input" accept="image/*" style="display:none;"
+                 onchange="previewAvatar(event)" />
+        </div>
+
+        <script>
+          function previewAvatar(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              const img = document.querySelector('.avatar-img');
+              const fallback = document.querySelector('.avatar-fallback');
+              img.src = e.target.result;
+              img.style.display = 'block';
+              fallback.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+          }
+        </script>
+
+        <!-- Nama Lengkap -->
+        <div class="form-group">
+          <label class="form-label">Nama Lengkap</label>
+          <input type="text" class="form-input" placeholder="" />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="" />
+          <p class="form-hint">Emial tidak bisa diubah</p>
+        </div>
+
+        <!-- Kata Sandi -->
+        <div class="form-group">
+          <label class="form-label">Kata Sandi</label>
+          <input type="password" class="form-input" placeholder="" />
+          <a href="#" class="link-ubah">Ubah Kata Sandi</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
+</file>
+
+<file path="patriotid_login/login.php">
+<?php
+// ============================================================
+//  PATRIOTID — Login
+//  Letakkan di: patriotid/patriotid_login/login.php
+// ============================================================
+session_start();
+
+// Kalau sudah login, langsung ke dashboard
+if (isset($_SESSION['user_id'])) {
+    header('Location: ../patriotid_dashboardadmin/dashboard.php');
+    exit;
+}
+
+require_once '../includes/koneksi.php';
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input    = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if (empty($input) || empty($password)) {
+        $error = 'Email/nomor telepon dan password wajib diisi.';
+    } else {
+        // Cari user berdasarkan email ATAU nomor telepon
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? OR no_telepon = ? LIMIT 1");
+        $stmt->execute([$input, $input]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user['password'])) {
+            // Login berhasil — simpan ke session
+            $_SESSION['user_id']   = $user['id'];
+            $_SESSION['user_nama'] = $user['nama'];
+            $_SESSION['user_role'] = $user['role'];
+
+            header('Location: ../patriotid_dashboardadmin/dashboard.php');
+            exit;
+        } else {
+            $error = 'Email/nomor telepon atau password salah.';
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | PatriotID</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Bagian kiri -->
+    <div class="left-section">
+      <img src="../garuda.png" alt="Garuda Pancasila" class="garuda">
+    </div>
+
+    <!-- Bagian kanan -->
+    <div class="right-section">
+      <div class="form-box">
+        <img src="../logo.png" alt="Logo PatriotID" class="logo">
+        <h2>Login</h2>
+        <p>Selamat Datang di PatriotID</p>
+
+        <?php if ($error): ?>
+          <div class="alert-error"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
+
+        <form method="POST" action="">
+          <div class="input-group">
+            <label for="email">Email atau Nomor Telepon</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Masukkan email atau nomor telepon"
+              value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+              required
+            >
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Masukkan password"
+              required
+            >
+          </div>
+
+          <a href="#" class="forgot">Lupa Password?</a>
+
+          <button type="submit" class="btn-login">Login</button>
+
+          <div class="social-login">
+            <button type="button" class="btn-google">Daftar Dengan Google</button>
+            <button type="button" class="btn-facebook">Daftar Dengan Facebook</button>
+          </div>
+
+          <p class="register-link">
+            Belum punya akun? <a href="../patriotid_daftar/daftar.php">Daftar</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+</file>
+
+<file path="patriotid_logout/logout.php">
+<?php
+// ============================================================
+//  PATRIOTID — Logout
+//  Letakkan di: patriotid/logout.php
+// ============================================================
+session_start();
+session_destroy();
+header('Location: patriotid_login/login.php');
+exit;
+</file>
+
+<file path="aaaa/aaaa.css">
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f7f4ef;
+}
+
+.sidebar {
+    width: 230px;
+    background: white;
+    height: 100vh;
+    position: fixed;
+    padding-top: 20px;
+}
+
+.logo {
+    width: 55px;
+    margin-left: 20px;
+}
+
+.brand {
+    color: #b30000;
+    margin-left: 20px;
+    margin-top: -10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+}
+
+.sidebar ul li.active,
+.sidebar ul li:hover {
+    background: #f4ece6;
+    border-radius: 8px;
+}
+
+.content {
+    margin-left: 260px;
+    padding: 40px;
+}
+
+.title {
+    color: #8c0000;
+}
+
+.table-box {
+    margin-top: 20px;
+    background: white;
+    border-radius: 12px;
+}
+
+.table-header {
+    background: #8c0000;
+    color: white;
+    padding: 15px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.btn-add {
+    background: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+}
+
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.btn-view {
+    background: #8c0000;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+</file>
+
+<file path="aaaa/aaaa.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Pahlawan</title>
+    <link rel="stylesheet" href="aaaa.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <img src="assets/logo.png" class="logo">
+    <h2 class="brand">PATRIOTID</h2>
+
+    <ul>
+        <li>Dashboard utama</li>
+        <li class="active">Data Pahlawan</li>
+        <li>Profil</li>
+        <li>Keluar</li>
+    </ul>
+</div>
+
+<div class="content">
+    <h1>Data Pahlawan</h1>
+    <h2 class="title">Daftar Pahlawan Nusantara</h2>
+
+    <div class="table-box">
+
+        <div class="table-header">
+            <span>Data Lengkap</span>
+            <button class="btn-add">Tambah Data</button>
+        </div>
+
+        <table>
+            <tr>
+                <th>Nama</th>
+                <th>Asal</th>
+                <th>Era</th>
+                <th>Aksi</th>
+            </tr>
+
+            <tr>
+                <td>Ir. Soekarno</td>
+                <td>Jawa Timur</td>
+                <td>Proklamasi</td>
+                <td><button class="btn-view">Lihat</button></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>
+</file>
+
+<file path="bb/bb.css">
+body {
+    margin: 0;
+    background: #f7f4ef;
+    font-family: Arial;
+}
+
+.sidebar {
+    width: 230px;
+    background: white;
+    height: 100vh;
+    position: fixed;
+    padding-top: 20px;
+}
+
+.logo {
+    width: 55px;
+    margin-left: 20px;
+}
+
+.brand {
+    color: #b30000;
+    margin-left: 20px;
+    margin-top: -10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+}
+
+.sidebar ul li.active,
+.sidebar ul li:hover {
+    background: #f4ece6;
+    border-radius: 8px;
+}
+
+.content {
+    margin-left: 260px;
+    padding: 40px;
+}
+
+.box {
+    background: white;
+    padding: 0;
+    border-radius: 12px;
+    width: 450px;
+}
+
+.header {
+    background: #8c0000;
+    color: white;
+    padding: 15px;
+    border-radius: 12px 12px 0 0;
+    font-weight: bold;
+}
+
+.photo {
+    width: 90px;
+    height: 90px;
+    background: #d8d8d8;
+    border-radius: 50%;
+    margin: 20px auto;
+}
+
+label {
+    display: block;
+    margin: 10px 20px 5px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 0 20px 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.ubah {
+    color: red;
+    font-size: 14px;
+    margin: 0 20px 20px;
+    cursor: pointer;
+}
+</file>
+
+<file path="bb/bb.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil</title>
+    <link rel="stylesheet" href="bb.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <img src="assets/logo.png" class="logo">
+    <h2 class="brand">PATRIOTID</h2>
+
+    <ul>
+        <li>Dashboard utama</li>
+        <li>Data Pahlawan</li>
+        <li class="active">Profil</li>
+        <li>Keluar</li>
+    </ul>
+</div>
+
+<div class="content">
+    <h1>Profil</h1>
+
+    <div class="box">
+        <div class="header">Data Akun</div>
+
+        <div class="photo"></div>
+
+        <label>Nama Lengkap</label>
+        <input type="text">
+
+        <label>Email</label>
+        <input type="email" placeholder="Email tidak bisa diubah" disabled>
+
+        <label>Kata Sandi</label>
+        <input type="password">
+
+        <p class="ubah">Ubah Kata Sandi</p>
+    </div>
+
+</div>
+
+</body>
+</html>
+</file>
+
+<file path="dashboard2/dashboard2.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pahlawan</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --merah-indo: #CE1126;
+            --merah-muda: #fff0f0;
+            --putih: #ffffff;
+            --abu-bg: #f8f9fa;
+            --teks-utama: #333333;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--abu-bg);
+            overflow-x: hidden;
+            color: var(--teks-utama);
+        }
+
+        /* SIDEBAR */
+        #sidebar-wrapper {
+            min-height: 100vh;
+            width: var(--sidebar-width);
+            background-color: var(--putih);
+            border-right: 4px solid var(--merah-indo);
+            transition: transform 0.3s ease;
+            position: fixed;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            top: 0;
+            left: 0;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+            padding: 1.5rem;
+            font-size: 1.4rem;
+            color: var(--merah-indo);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+
+        .list-group-item-sidebar {
+            background-color: transparent;
+            color: var(--teks-utama);
+            border: none;
+            padding: 1rem 1.5rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+        }
+
+        .list-group-item-sidebar:hover {
+            background-color: var(--merah-muda);
+            color: var(--merah-indo);
+            padding-left: 1.8rem;
+        }
+
+        .list-group-item-sidebar.active {
+            background-color: var(--merah-muda);
+            color: var(--merah-indo);
+            font-weight: 600;
+            border-left: 5px solid var(--merah-indo);
+        }
+
+        /* CONTENT */
+        #page-content-wrapper {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            transition: margin 0.3s ease;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        .top-navbar {
+            background: white;
+            border-bottom: 2px solid var(--merah-indo);
+            padding: 1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* CARDS */
+        .card-stat {
+            border-left: 4px solid var(--merah-indo);
+            transition: transform 0.2s;
+        }
+
+        .card-stat:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-merah {
+            background-color: var(--merah-indo);
+            color: white;
+            border: none;
+        }
+
+        .btn-merah:hover {
+            background-color: #a80f21;
+            color: white;
+        }
+
+        /* SECTIONS */
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+            animation: fadeIn 0.4s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE - TABLET */
+        @media (max-width: 1024px) {
+            :root {
+                --sidebar-width: 220px;
+            }
+
+            #sidebar-wrapper .sidebar-heading {
+                font-size: 1.2rem;
+                padding: 1.2rem;
+            }
+
+            .list-group-item-sidebar {
+                padding: 0.9rem 1.2rem;
+                font-size: 14px;
+            }
+        }
+
+        /* RESPONSIVE - MOBILE & TABLET */
+        @media (max-width: 768px) {
+            #sidebar-wrapper {
+                transform: translateX(-100%);
+            }
+
+            body.sidebar-open #sidebar-wrapper {
+                transform: translateX(0);
+            }
+
+            body.sidebar-open::after {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            #page-content-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .top-navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .container-fluid {
+                padding: 1rem !important;
+            }
+
+            /* Hide desktop text on mobile */
+            .d-none.d-md-block {
+                display: none !important;
+            }
+
+            .d-none.d-sm-inline {
+                display: none !important;
+            }
+
+            /* Stack cards vertically */
+            .col-lg-3, .col-lg-6, .col-md-6 {
+                margin-bottom: 1rem;
+            }
+
+            /* Responsive table */
+            .table-responsive {
+                font-size: 14px;
+            }
+
+            .table td, .table th {
+                padding: 0.5rem;
+            }
+
+            /* Smaller buttons on mobile */
+            .btn-sm {
+                padding: 0.25rem 0.5rem;
+                font-size: 12px;
+            }
+        }
+
+        /* MOBILE SMALL */
+        @media (max-width: 480px) {
+            #sidebar-wrapper {
+                width: 80%;
+                max-width: 280px;
+            }
+
+            .sidebar-heading {
+                font-size: 1.1rem !important;
+                padding: 1rem !important;
+            }
+
+            .list-group-item-sidebar {
+                padding: 0.8rem 1rem;
+                font-size: 13px;
+            }
+
+            .top-navbar h5 {
+                font-size: 1rem;
+            }
+
+            .card-stat h3 {
+                font-size: 1.5rem;
+            }
+
+            .table-responsive {
+                font-size: 12px;
+            }
+
+            .btn {
+                font-size: 12px;
+            }
+        }
+
+        /* LANDSCAPE TABLET */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            #sidebar-wrapper {
+                width: 200px;
+            }
+
+            .list-group-item-sidebar {
+                padding: 0.7rem 1rem;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar-wrapper">
+        <div class="sidebar-heading fw-bold">
+            <i class="fas fa-monument me-2"></i> NUSANTARA
+        </div>
+        <div class="list-group list-group-flush mt-3">
+            <a onclick="showSection('dashboard', this)" class="list-group-item-sidebar active">
+                <i class="fas fa-th-large me-2"></i> Dashboard Utama
+            </a>
+            <a onclick="showSection('pahlawan', this)" class="list-group-item-sidebar">
+                <i class="fas fa-users me-2"></i> Data Pahlawan
+            </a>
+            <a onclick="showSection('arsip', this)" class="list-group-item-sidebar">
+                <i class="fas fa-book-open me-2"></i> Arsip Sejarah
+            </a>
+            <a href="../patriotid_landingpage/landingpage.html" class="list-group-item-sidebar mt-5">
+                <i class="fas fa-sign-out-alt me-2"></i> Keluar
+            </a>
+        </div>
+    </div>
+
+    <div id="page-content-wrapper">
+        <nav class="top-navbar d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-outline-danger btn-sm me-3" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h5 class="m-0 text-danger d-none d-md-block" id="page-title">Dashboard Utama</h5>
+            </div>
+            
+            <div class="d-flex align-items-center">
+                <span class="text-dark me-3 d-none d-sm-inline">Admin RI</span>
+                <button class="btn btn-merah btn-sm">
+                    <i class="fas fa-bell"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container-fluid px-4 py-4">
+
+            <div id="dashboard" class="section-content active">
+                <h2 class="text-danger fw-bold mb-4">Ringkasan Utama</h2>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="card card-stat bg-white p-3 shadow-sm h-100">
+                            <div>
+                                <p class="text-muted small mb-1">TOTAL PAHLAWAN</p>
+                                <h3 class="fw-bold mb-0 text-dark">192</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="card card-stat bg-white p-3 shadow-sm h-100">
+                            <div>
+                                <p class="text-muted small mb-1">ARSIP DIGITAL</p>
+                                <h3 class="fw-bold mb-0 text-dark">1,450</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="card bg-danger text-white p-3 shadow-sm h-100">
+                            <h5 class="mb-1 fw-bold">"Merdeka atau Mati!"</h5>
+                            <p class="small opacity-75 mb-0">Semangat Pahlawan Nasional.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-danger text-white py-3">
+                        <h5 class="mb-0 fw-bold">Aktivitas Terkini</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Waktu</th>
+                                        <th>Aktivitas</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>10:00 WIB</td>
+                                        <td>Menambah data Cut Nyak Dien</td>
+                                        <td><span class="badge bg-success">Selesai</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>09:30 WIB</td>
+                                        <td>Verifikasi foto Jenderal Sudirman</td>
+                                        <td><span class="badge bg-warning text-dark">Menunggu</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pahlawan" class="section-content">
+                <h2 class="text-danger fw-bold mb-4">Daftar Pahlawan Nusantara</h2>
+                
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-danger text-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold">Data Lengkap</h5>
+                        <button class="btn btn-light text-danger btn-sm border border-danger">Tambah Data</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Asal</th>
+                                        <th>Era</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Ir. Soekarno</td>
+                                        <td>Jawa Timur</td>
+                                        <td>Proklamasi</td>
+                                        <td><button class="btn btn-sm btn-outline-danger">Lihat</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">P. Diponegoro</td>
+                                        <td>Yogyakarta</td>
+                                        <td>Perang Jawa</td>
+                                        <td><button class="btn btn-sm btn-outline-danger">Lihat</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="arsip" class="section-content">
+                <h2 class="text-danger fw-bold mb-4">Arsip Digital & Dokumen Penting</h2>
+                
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card shadow-sm h-100 p-3">
+                            <i class="fas fa-file-pdf fa-2x text-danger mb-2"></i>
+                            <h6 class="fw-bold">Dokumen Proklamasi</h6>
+                            <p class="small text-muted mb-0">PDF | 1.2 MB</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card shadow-sm h-100 p-3">
+                            <i class="fas fa-file-image fa-2x text-danger mb-2"></i>
+                            <h6 class="fw-bold">Foto Konferensi Meja Bundar</h6>
+                            <p class="small text-muted mb-0">JPG | 800 KB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Toggle Sidebar
+        const toggleButton = document.getElementById("menu-toggle");
+        
+        toggleButton.addEventListener('click', function() {
+            document.body.classList.toggle('sidebar-open');
+        });
+
+        // Close sidebar when clicking overlay (mobile)
+        document.body.addEventListener('click', function(e) {
+            if (document.body.classList.contains('sidebar-open') && 
+                !document.getElementById('sidebar-wrapper').contains(e.target) &&
+                e.target !== toggleButton && 
+                !toggleButton.contains(e.target)) {
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+
+        // Navigation Logic
+        function showSection(sectionId, element) {
+            // Update page visibility
+            document.querySelectorAll('.section-content').forEach(div => {
+                div.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active sidebar item
+            if(element) {
+                document.querySelectorAll('.list-group-item-sidebar').forEach(item => {
+                    item.classList.remove('active');
+                });
+                element.classList.add('active');
+
+                // Update navbar title
+                const titleMap = {
+                    'dashboard': 'Dashboard Utama',
+                    'pahlawan': 'Data Pahlawan',
+                    'arsip': 'Arsip Sejarah'
+                };
+                document.getElementById('page-title').innerText = titleMap[sectionId];
+            }
+
+            // Close sidebar on mobile after selecting
+            if (window.innerWidth <= 768) {
+                document.body.classList.remove('sidebar-open');
+            }
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+    </script>
+</body>
+</html>
+</file>
+
+<file path="dashboard2/Dashboard3.css">
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f4ef;
+}
+
+.sidebar {
+    width: 230px;
+    background: white;
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+}
+
+.logo {
+    width: 55px;
+    margin-left: 20px;
+}
+
+.brand {
+    color: #a80000;
+    margin-left: 20px;
+    margin-top: -10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.sidebar ul li.active,
+.sidebar ul li:hover {
+    background: #f4ece6;
+    border-radius: 8px;
+}
+
+.content {
+    margin-left: 260px;
+    padding: 40px;
+}
+
+.subtitle {
+    color: #8c0000;
+    font-weight: bold;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    background: #f7f3ea;
+    padding: 20px;
+    width: 180px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.card span {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.quote {
+    background: #8c0000;
+    color: white;
+}
+
+.user-box {
+    margin-top: 40px;
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+}
+
+.user-box .header {
+    background: #8c0000;
+    color: white;
+    padding: 15px;
+    border-radius: 12px 12px 0 0;
+    font-weight: bold;
+}
+
+.row {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.green,
+.red {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.green { background: green; }
+.red { background: red; }
+</file>
+
+<file path="dashboard2/Dashboard3.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - PatriotID</title>
+    <link rel="stylesheet" href="Dashboard3.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <img src="assets/logo.png" class="logo">
+    <h2 class="brand">PATRIOTID</h2>
+
+    <ul>
+        <li class="active">Dashboard utama</li>
+        <li>Data Pahlawan</li>
+        <li>Profil</li>
+        <li>Keluar</li>
+    </ul>
+</div>
+
+<div class="content">
+    <h1>Dashboard</h1>
+    <h2 class="subtitle">Ringkasan Utama</h2>
+
+    <div class="cards">
+        <div class="card">Total Pahlawan <br> <span>50</span></div>
+        <div class="card">Favorit user <br> <span>20</span></div>
+        <div class="card quote">"Merdeka atau mati!"<br><small>Semangat Pahlawan Nasional</small></div>
+    </div>
+
+    <div class="user-box">
+        <div class="header">User Online (3)</div>
+
+        <div class="row"><span class="green"></span> <b>Admin Pusat</b></div>
+        <div class="row"><span class="green"></span> Admin Sejarah Jakarta</div>
+        <div class="row"><span class="green"></span> Petugas Arsip 002</div>
+        <div class="row"><span class="red"></span> User Non-Aktif</div>
+    </div>
+</div>
+
+</body>
+</html>
+</file>
+
+<file path="jfhngu.html">
+<script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'patriot-red': '#CC0000', // Merah khas PatriotID
+                        'patriot-maroon': '#a02e2a', // Merah Marun untuk tombol
+                        'bg-gradient-start': '#FFF4F4', // Merah muda sangat muda
+                        'bg-gradient-end': '#FFFFFF', // Putih
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Gaya Kustom untuk Meniru Latar Belakang Gradien */
+        body {
+            background: linear-gradient(to bottom, #FFF4F4 0%, #FFFFFF 100%);
+            min-height: 100vh;
+        }
+
+        /* Gaya untuk Garis Timeline Vertikal (putus saat melewati teks) */
+        .timeline-line {
+            position: absolute;
+            left: 50%; /* Pusatkan garis di tengah halaman */
+            transform: translateX(-50%);
+            width: 0;
+            border-left: 3px dashed #000000;
+            height: 100%;
+            top: 0;
+            z-index: 5;
+        }
+
+        /* Gaya untuk Container Konten Timeline (agar konten berada di atas garis) */
+        .timeline-content-container {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- 1. Navbar / Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <!-- Logo PatriotID -->
+            <a href="#" class="flex items-center space-x-2">
+                <!-- Icon Elang Merah PatriotID (menggunakan SVG inline untuk kualitas) -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-patriot-red">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8 0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8z" fill="currentColor"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 7c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5S13.38 7 12 7zm0 8c-2.485 0-4.5 2.015-4.5 4.5 0 .276.224.5.5.5h8c.276 0 .5-.224.5-.5 0-2.485-2.015-4.5-4.5-4.5z" fill="currentColor"/>
+                    <path d="M14 12.5a2.5 2.5 0 01-5 0V9.5h5v3z" fill="#FFFFFF"/>
+                </svg>
+                <span class="text-lg font-bold text-gray-800">PATRIOTID</span>
+            </a>
+
+            <!-- Navigasi Utama (Hanya Tampilkan di Desktop) -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-sm font-semibold text-patriot-red border-b-2 border-patriot-red pb-1">Beranda</a>
+                <a href="#" class="text-sm font-medium text-gray-600 hover:text-patriot-red transition duration-150">Pahlawan</a>
+                <a href="#" class="text-sm font-medium text-gray-600 hover:text-patriot-red transition duration-150">Tempat Bersejarah</a>
+                <a href="#" class="text-sm font-medium text-gray-600 hover:text-patriot-red transition duration-150">Tragedi Bersejarah</a>
+            </nav>
+
+            <!-- Tombol Aksi -->
+            <div class="flex space-x-3">
+                <button 
+                    class="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 rounded-lg border border-gray-200 hover:bg-gray-200 transition duration-150 shadow-sm">
+                    Login
+                </button>
+                <button 
+                    class="px-4 py-2 text-sm font-semibold text-white bg-patriot-red rounded-lg hover:bg-patriot-maroon transition duration-150 shadow-md">
+                    Daftar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Konten Utama (Timeline) -->
+    <main class="max-w-4xl mx-auto pt-16 pb-32 px-4 sm:px-6 lg:px-8 relative timeline-content-container">
+        
+        <!-- Garis Timeline Vertikal Merah (Sekarang putus-putus) -->
+        <div class="timeline-line h-[calc(100%-80px)] top-10"></div>
+        
+        <!-- Timeline Item 1: Latar Belakang -->
+        <div class="text-center mb-24">
+            
+            <!-- Tahun / Label -->
+            <div class="inline-block px-3 py-1 mb-4 text-xs font-bold text-patriot-red border border-patriot-red rounded-full bg-white relative z-10 shadow-sm">
+                1945
+            </div>
+
+            <!-- Judul Besar -->
+            <h2 class="text-5xl font-bold text-gray-800 mb-6 tracking-tight leading-tight">
+                Latar Belakang
+            </h2>
+
+            <!-- Deskripsi Paragraf -->
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Pada Oktober 1945, pasukan Sekutu (tentara Inggris) tiba di Bandung 
+                dan menuntut agar senjata milik rakyat Indonesia diserahkan. Hal ini 
+                memicu perlawanan dari Tentara Keamanan Rakyat (TKR) dan para 
+                pejuang. Pertempuran pun pecah pada 21 November 1945, di mana para 
+                pejuang menyerang markas Sekutu di Bandung bagian utara.
+            </p>
+        </div>
+
+        <!-- Timeline Item 2: Konten Tambahan (Simulasi) -->
+        <div class="flex justify-center mb-24">
+             <div class="w-full max-w-2xl text-center">
+                <!-- Lingkaran Penanda di Garis Timeline -->
+                <div class="w-5 h-5 bg-white border-4 border-patriot-red rounded-full mx-auto relative z-10 -mb-2"></div>
+                
+                <!-- Konten Teks -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 mt-6">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-bold text-patriot-red border border-patriot-red rounded-full bg-white relative z-10 shadow-sm">
+                        24 November 1945
+                    </div>
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-3">Ultimatum Sekutu</h3>
+                    <p class="text-base text-gray-600 leading-relaxed">
+                        Sekutu mengeluarkan ultimatum agar seluruh pasukan Republik Indonesia 
+                        mengosongkan wilayah Bandung bagian utara. Ultimatum ini ditolak mentah-mentah 
+                        oleh pihak Indonesia.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timeline Item 3: Akhir (Simulasi) -->
+        <div class="flex justify-center mb-24">
+             <div class="w-full max-w-2xl text-center">
+                <!-- Lingkaran Penanda di Garis Timeline -->
+                <div class="w-5 h-5 bg-white border-4 border-patriot-red rounded-full mx-auto relative z-10 -mb-2"></div>
+                
+                <!-- Konten Teks -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 mt-6">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-bold text-patriot-red border border-patriot-red rounded-full bg-white relative z-10 shadow-sm">
+                        Maret 1946
+                    </div>
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-3">Bandung Lautan Api</h3>
+                    <p class="text-base text-gray-600 leading-relaxed">
+                        Peristiwa heroik pembakaran kota Bandung dalam strategi 'Bumi Hangus' 
+                        sebagai penolakan terhadap ultimatum Sekutu.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Penanda Akhir Timeline -->
+        <div class="flex justify-center">
+             <div class="w-5 h-5 bg-patriot-red rounded-full relative z-10"></div>
+        </div>
+
+    </main>
+
+    <!-- JavaScript (Tidak ada interaksi kompleks, tetapi ini adalah template JS) -->
+    <script>
+        // Logika JavaScript dapat ditambahkan di sini jika ada interaksi dinamis
+        console.log("Halaman PatriotID Beranda dimuat.");
+
+        // Contoh: Logika untuk menu mobile (jika ingin ditambahkan)
+        // const mobileMenuButton = document.getElementById('mobileMenuButton');
+        // mobileMenuButton.addEventListener('click', () => {
+        //     // Toggle menu mobile
+        // });
+    </script>
+</file>
+
+<file path="patriotid_borobudur/borobudur.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #fffaf8;
+  color: #222;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.logo span {
+  color: #e60000;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #ff0000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .login {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #e60000;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.auth-buttons .daftar {
+  background-color: #e60000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.auth-buttons .login:hover {
+  background-color: #ddd;
+}
+
+.auth-buttons .daftar:hover {
+  color: #fff;
+  background-color: #b30000;
+}
+
+/* ===== ARTIKEL ===== */
+.artikel {
+  padding: 60px 80px;
+}
+
+.artikel h2 {
+  text-align: center;
+  font-size: 30px;
+  background: #eee;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+
+.artikel-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.left, .right {
+  flex: 1;
+  min-width: 300px;
+}
+
+.left p, .right p {
+  margin-bottom: 20px;
+  text-align: justify;
+  line-height: 1.8;
+}
+
+.left ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.right img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.gambar-besar img {
+  width: 100%;
+  margin-top: 30px;
+  border-radius: 12px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: #f8f8f8;
+  padding: 40px 60px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo img {
+  width: 35px;
+}
+
+.footer-left h3 {
+  color: #000;
+  font-size: 20px;
+}
+
+.footer-left span {
+  color: #e63946;
+}
+
+.footer-left p {
+  margin-top: 10px;
+  max-width: 350px;
+  color: #333;
+}
+
+.copy {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #666;
+}
+
+.footer-right {
+  display: flex;
+  gap: 80px;
+}
+
+.footer-right div h4 {
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.footer-right div a {
+  display: block;
+  color: #555;
+  text-decoration: none;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.footer-right div a:hover {
+  color: #e63946;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .artikel-content {
+    flex-direction: column;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .footer-right {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+</file>
+
+<file path="patriotid_borobudur/borobudur.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candi Borobudur | PatriotID</title>
+  <link rel="stylesheet" href="borobudur.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../logo.png" alt="Logo PatriotID">
+      <h1>Patriot<span>ID</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../patriotid_landingpage/landingpage.html#beranda">Beranda</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#profil">Pahlawan</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tempat">Tempat</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tragedi">Tragedi</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="../patriotid_login/login.html" class="login">Login</a>
+      <a href="../patriotid_daftar/daftar.html" class="daftar">Daftar</a>
+    </div>
+  </header>
+
+  <!-- Konten Artikel -->
+  <main class="artikel">
+    <h2>Candi Borobudur</h2>
+    <div class="artikel-content">
+      <div class="left">
+        <p><b>Masa Pembangunan dan Kejayaan (Abad ke-8)</b><br>
+        Candi Borobudur dibangun sekitar tahun 800 Masehi oleh Dinasti Syailendra, sebuah dinasti kerajaan agung berlatar belakang Mahayana yang berkuasa di kawasan Medang Mataram Kuno. Candi ini terletak di kawasan perbukitan Magelang, Jawa Tengah, dan dibangun sebagai tempat pemujaan agama Buddha Mahayana.</p>
+
+        <p>Strukturnya terdiri dari tiga tingkatan yang mewakili alam semesta dalam kosmologi Buddha:
+        <ul>
+          <li><b>Kamadhatu:</b> bagian bawah candi yang melambangkan dunia nafsu.</li>
+          <li><b>Rupadhatu:</b> dunia bentuk, di mana manusia mulai meninggalkan keinginan duniawi.</li>
+          <li><b>Arupadhatu:</b> dunia tanpa bentuk, lambang kesempurnaan tertinggi.</li>
+        </ul></p>
+
+        <p><b>Masa Terlantar (Abad ke-10 hingga ke-19)</b><br>
+        Sekitar abad ke-10, Candi Borobudur sempat terlantar akibat perpindahan pusat kerajaan ke Jawa Timur. Gunung berapi dan alam yang berubah turut membuat candi ini tertutup abu vulkanik selama berabad-abad.</p>
+
+        <p>Namun pada abad ke-19, Borobudur ditemukan kembali oleh Sir Thomas Stamford Raffles, Gubernur Jenderal Inggris di Jawa. Ia memerintahkan pembersihan situs dan mulai mendokumentasikan reliefnya.</p>
+      </div>
+
+      <div class="right">
+        <img src="../borobudur-2.png" alt="Candi Borobudur">
+        <p><b>Masa Pemugaran dan Revolusi (Abad ke-19 hingga Sekarang)</b><br>
+        Pemerintah Indonesia bersama UNESCO melakukan pemugaran besar-besaran antara tahun 1975 hingga 1983. Proyek ini berhasil memindahkan dan menyusun kembali lebih dari satu juta batu candi agar tetap kokoh. Sejak saat itu, Candi Borobudur menjadi salah satu warisan dunia paling berharga.</p>
+      </div>
+    </div>
+
+    <div class="gambar-besar">
+      <img src="../borobudur-3.png" alt="Borobudur">
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="footer-logo">
+          <img src="../logo.png" alt="PatriotID">
+          <h3>PATRIOT<span>ID</span></h3>
+        </div>
+        <p>pahlawan bukan hanya mereka yang berperang, tapi juga mereka yang menjaga budaya bangsa.</p>
+        <p class="copy">2025 | All rights reserved</p>
+      </div>
+
+      <div class="footer-right">
+        <div>
+          <h4>Tentang</h4>
+          <a href="#">Projek</a>
+          <a href="#">Kontak</a>
+          <a href="#">Tentang kami</a>
+        </div>
+        <div>
+          <h4>Ikuti Kami</h4>
+          <a href="#">X @patriotid</a>
+          <a href="#">Instagram @patriotid</a>
+          <a href="#">Facebook @patriotid</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+</file>
+
+<file path="patriotid_dashboardadmin/dashboard.css">
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f0;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 180px;
+  background: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 28px;
+}
+
+.logo img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #8B1010;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.logo-text span {
+  color: #222222;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: block;
+  padding: 11px 16px;
+  font-size: 13px;
+  color: #444444;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-item:hover {
+  background: #fdf0f0;
+  color: #8B1010;
+}
+
+.nav-item.active {
+  color: #8B1010;
+  font-weight: 600;
+  border-left-color: #8B1010;
+  background: #fdf0f0;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  flex: 1;
+  padding: 32px 36px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222222;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8B1010;
+  margin-bottom: 16px;
+}
+
+/* ── STAT CARDS ── */
+.cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.8fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 18px 22px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #888888;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #222222;
+}
+
+.quote-card {
+  background: #8B1010;
+  border-radius: 10px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.quote-sub {
+  font-size: 12px;
+  color: #e8b0b0;
+}
+
+/* ── ONLINE USERS TABLE ── */
+.online-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.online-header {
+  background: #8B1010;
+  padding: 11px 18px;
+}
+
+.online-header-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  border-bottom: 1px solid #f2f2f2;
+  transition: background 0.12s;
+}
+
+.user-row:last-child {
+  border-bottom: none;
+}
+
+.user-row:hover {
+  background: #fafafa;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot.online {
+  background: #27ae60;
+  box-shadow: 0 0 0 2px #d4f5e2;
+}
+
+.dot.offline {
+  background: #e74c3c;
+  box-shadow: 0 0 0 2px #fde0dd;
+}
+
+.user-name {
+  font-size: 13.5px;
+  color: #333333;
+}
+
+.user-name strong {
+  font-weight: 600;
+  color: #111111;
+}
+</file>
+
+<file path="patriotid_dashboardadmin/dashboard.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PatriotID - Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">
+      <!-- Ganti src dengan path logo kamu -->
+      <img src="assets/logo.png" alt="PatriotID Logo" />
+      <span class="logo-text">PATRIOT<span>ID</span></span>
+    </div>
+    <nav>
+      <a href="#" class="nav-item active">Dashboard utama</a>
+      <a href="#" class="nav-item">Data Pahlawan</a>
+      <a href="#" class="nav-item">Profil</a>
+      <a href="#" class="nav-item">Keluar</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <h1 class="page-title">Dashboard</h1>
+    <h2 class="section-title">Ringkasan Utama</h2>
+
+    <div class="cards-row">
+      <div class="stat-card">
+        <p class="stat-label">Total Pahlawan</p>
+        <p class="stat-value">50</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Favorit user</p>
+        <p class="stat-value">20</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote-text">"Merdeka atau mati!"</p>
+        <p class="quote-sub">Semangat Pahlawan Nasional</p>
+      </div>
+    </div>
+
+    <div class="online-card">
+      <div class="online-header">
+        <p class="online-header-text">User Online (3)</p>
+      </div>
+      <div class="user-row">
+        <span class="dot online"></span>
+        <span class="user-name"><strong>**Admin Pusat**</strong></span>
+      </div>
+      <div class="user-row">
+        <span class="dot online"></span>
+        <span class="user-name">Admin Sejarah Jakarta</span>
+      </div>
+      <div class="user-row">
+        <span class="dot online"></span>
+        <span class="user-name">Petugas Arsip 002</span>
+      </div>
+      <div class="user-row">
+        <span class="dot offline"></span>
+        <span class="user-name">User Non-Aktif</span>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
+</file>
+
+<file path="patriotid_dewantara/dewantara.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fffaf9;
+  color: #222;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.logo span {
+  color: #e60000;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #e60000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .login {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #e60000;
+  font-weight: 500;
+}
+
+.auth-buttons .daftar {
+  background-color: #e60000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.auth-buttons .login:hover {
+  background-color: #ddd;
+}
+
+.auth-buttons .daftar:hover {
+  color: #fff;
+  background-color: #b30000;
+}
+
+/* ===== Konten Utama ===== */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 60px 100px;
+}
+
+.text-section {
+  flex: 1;
+}
+
+.text-section h2 {
+  font-size: 32px;
+  color: #c60000;
+  margin-bottom: 20px;
+}
+
+.text-section h3 {
+  margin-top: 20px;
+  color: #b00000;
+  font-size: 20px;
+}
+
+.text-section p {
+  margin-top: 10px;
+  line-height: 1.7;
+  color: #444;
+  text-align: justify;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #c60000;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #a00000;
+}
+
+/* ===== Gambar Pahlawan ===== */
+.image-section img {
+  width: 340px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section img {
+    width: 80%;
+  }
+
+  .text-section {
+    text-align: left;
+  }
+}
+</file>
+
+<file path="patriotid_dewantara/dewantara.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Pahlawan - Ir. Soekarno | PatriotID</title>
+  <link rel="stylesheet" href="dewantara.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../logo.png" alt="Logo PatriotID">
+      <h1>Patriot<span>ID</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../patriotid_landingpage/landingpage.html#beranda">Beranda</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#profil">Pahlawan</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tempat">Tempat</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tragedi">Tragedi</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="../patriotid_login/login.html" class="login">Login</a>
+      <a href="../patriotid_daftar/daftar.html" class="daftar">Daftar</a>
+    </div>
+  </header>
+
+  <!-- Konten Utama -->
+  <main class="hero">
+    <div class="text-section">
+      <h2>Ki Hajar Dewantara</h2>
+      <p>
+        Ki Hajar Dewantara, yang terlahir sebagai Raden Mas Soewardi Soerjaningrat pada 2 Mei 1889 di Yogyakarta, berasal dari keluarga bangsawan. Setelah tidak menyelesaikan sekolah kedokteran, ia memilih jalur jurnalistik dan menjadi penulis yang kritis terhadap pemerintah kolonial Belanda. Puncaknya, ia menulis artikel terkenal berjudul "Als Ik Eens Nederlander Was" yang mengecam perayaan kemerdekaan Belanda. Akibat tulisannya itu, ia diasingkan ke Belanda bersama dua rekannya, yang dikenal sebagai Tiga Serangkai.
+
+Mendirikan Taman Siswa
+Selama di Belanda, Soewardi mendalami ilmu pendidikan. Sekembalinya ke tanah air, ia melepaskan gelar kebangsawanannya dan mengganti namanya menjadi Ki Hajar Dewantara. Pada 3 Juli 1922, ia mendirikan Perguruan Nasional Taman Siswa di Yogyakarta. Sekolah ini didirikan sebagai perlawanan terhadap sistem pendidikan kolonial dan bertujuan untuk memajukan pendidikan bagi rakyat pribumi dengan berlandaskan nilai-nilai nasionalisme dan kebudayaan Indonesia.
+
+Konsep Pendidikan dan Semboyan Legendaris
+Ki Hajar Dewantara merumuskan semboyan yang menjadi landasan filosofi pendidikan nasional, yaitu:
+
+Ing Ngarsa Sung Tuladha (Di depan, memberi teladan).
+
+Ing Madya Mangun Karsa (Di tengah, membangun semangat).
+
+Tut Wuri Handayani (Di belakang, memberi dorongan).
+
+Semboyan ini menekankan peran pendidik sebagai panutan, motivator, dan pendorong bagi para siswanya.
+
+Pasca Kemerdekaan dan Warisan
+Setelah kemerdekaan Indonesia, Ki Hajar Dewantara menjabat sebagai Menteri Pengajaran (Pendidikan) pertama. Atas jasa-jasanya dalam merintis pendidikan nasional, ia dinobatkan sebagai Pahlawan Pergerakan Nasional. Tanggal kelahirannya, 2 Mei, ditetapkan sebagai Hari Pendidikan Nasional, untuk mengenang dedikasinya dalam memperjuangkan hak pendidikan bagi seluruh rakyat Indonesia.
+      </p>
+
+      
+      <a href="../patriotid_landingpage/landingpage.html#profil" class="btn-back">← Kembali</a>
+    </div>
+
+    <div class="image-section">
+      <img src="../dewantara-2.png" alt="dewantara-2" />
+    </div>
+  </main>
+</body>
+</html>
+</file>
+
+<file path="patriotid_diponegoro/diponegoro.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fffaf9;
+  color: #222;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.logo span {
+  color: #e60000;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #e60000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .login {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #e60000;
+  font-weight: 500;
+}
+
+.auth-buttons .daftar {
+  background-color: #e60000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.auth-buttons .login:hover {
+  background-color: #ddd;
+}
+
+.auth-buttons .daftar:hover {
+  color: #fff;
+  background-color: #b30000;
+}
+
+/* ===== Konten Utama ===== */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 60px 100px;
+}
+
+.text-section {
+  flex: 1;
+}
+
+.text-section h2 {
+  font-size: 32px;
+  color: #c60000;
+  margin-bottom: 20px;
+}
+
+.text-section h3 {
+  margin-top: 20px;
+  color: #b00000;
+  font-size: 20px;
+}
+
+.text-section p {
+  margin-top: 10px;
+  line-height: 1.7;
+  color: #444;
+  text-align: justify;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #c60000;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #a00000;
+}
+
+/* ===== Gambar Pahlawan ===== */
+.image-section img {
+  width: 340px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section img {
+    width: 80%;
+  }
+
+  .text-section {
+    text-align: left;
+  }
+}
+</file>
+
+<file path="patriotid_diponegoro/diponegoro.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Pahlawan - Ir. Soekarno | PatriotID</title>
+  <link rel="stylesheet" href="diponegoro.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../logo.png" alt="Logo PatriotID">
+      <h1>Patriot<span>ID</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../patriotid_landingpage/landingpage.html#beranda">Beranda</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#profil">Pahlawan</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tempat">Tempat</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tragedi">Tragedi</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="../patriotid_login/login.html" class="login">Login</a>
+      <a href="../patriotid_daftar/daftar.html" class="daftar">Daftar</a>
+    </div>
+  </header>
+
+  <!-- Konten Utama -->
+  <main class="hero">
+    <div class="text-section">
+      <h2>Pangeran Diponegoro</h2>
+      <p>
+        Pangeran Diponegoro, lahir pada 11 November 1785 dengan nama Raden Mas Antawirya, adalah putra sulung Sultan Hamengkubuwono III. Meskipun seorang putra mahkota, ia menolak kehidupan mewah keraton. Ia lebih memilih tinggal di luar istana, mendalami ajaran Islam, dan berinteraksi langsung dengan rakyat. Sikap ini membuatnya sangat dihormati dan dicintai oleh masyarakat Tegalrejo, tempat ia tinggal.
+
+Pemicu Perang Jawa
+Hubungan antara Diponegoro dan Belanda semakin tegang karena campur tangan Belanda dalam urusan keraton dan kebijakan yang merugikan rakyat. Puncaknya, pada Mei 1825, Belanda secara sepihak membangun jalan yang melewati makam leluhur Diponegoro. Tindakan ini dianggap sebagai penghinaan berat. Peristiwa ini menjadi pemicu langsung bagi Pangeran Diponegoro untuk memimpin perlawanan bersenjata terhadap pemerintah kolonial Belanda.
+
+Strategi Perang dan Akhir Perjuangan
+Perang Diponegoro (1825-1830) menjadi salah satu perang terberat bagi Belanda. Pasukan Diponegoro menggunakan strategi perang gerilya, menyerang secara tiba-tiba dari hutan dan pegunungan, yang membuat Belanda kewalahan. Namun, Belanda membalas dengan siasat benteng stelsel, membangun benteng-benteng untuk mempersempit ruang gerak pasukan Diponegoro. Akhirnya, pada tahun 1830, Belanda menjebak Diponegoro dalam perundingan palsu di Magelang. Ia ditangkap dan diasingkan, hingga wafat di Makassar.
+
+Warisan Pahlawan
+Meskipun kalah dan ditangkap, perjuangan Pangeran Diponegoro tidak sia-sia. Perang ini menguras habis tenaga dan dana Belanda, dan menjadi inspirasi besar bagi perjuangan kemerdekaan di masa depan. Ia dikenang sebagai simbol perlawanan, keberanian, dan semangat nasionalisme.
+      </p>
+
+
+
+      <a href="../patriotid_landingpage/landingpage.html#profil" class="btn-back">← Kembali</a>
+    </div>
+
+    <div class="image-section">
+      <img src="../diponegoro-2.png" alt="diponegoro-2" />
+    </div>
+  </main>
+</body>
+</html>
+</file>
+
+<file path="patriotid_kartini/kartini.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fffaf9;
+  color: #222;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.logo span {
+  color: #e60000;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #e60000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .login {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #e60000;
+  font-weight: 500;
+}
+
+.auth-buttons .daftar {
+  background-color: #e60000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.auth-buttons .login:hover {
+  background-color: #ddd;
+}
+
+.auth-buttons .daftar:hover {
+  color: #fff;
+  background-color: #b30000;
+}
+
+/* ===== Konten Utama ===== */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 60px 100px;
+}
+
+.text-section {
+  flex: 1;
+}
+
+.text-section h2 {
+  font-size: 32px;
+  color: #c60000;
+  margin-bottom: 20px;
+}
+
+.text-section h3 {
+  margin-top: 20px;
+  color: #b00000;
+  font-size: 20px;
+}
+
+.text-section p {
+  margin-top: 10px;
+  line-height: 1.7;
+  color: #444;
+  text-align: justify;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #c60000;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #a00000;
+}
+
+/* ===== Gambar Pahlawan ===== */
+.image-section img {
+  width: 340px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section img {
+    width: 80%;
+  }
+
+  .text-section {
+    text-align: left;
+  }
+}
+</file>
+
+<file path="patriotid_kartini/kartini.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Pahlawan - Ir. Soekarno | PatriotID</title>
+  <link rel="stylesheet" href="kartini.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../logo.png" alt="Logo PatriotID">
+      <h1>Patriot<span>ID</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../patriotid_landingpage/landingpage.html#beranda">Beranda</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#profil">Pahlawan</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tempat">Tempat</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tragedi">Tragedi</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="../patriotid_login/login.html" class="login">Login</a>
+      <a href="../patriotid_daftar/daftar.html" class="daftar">Daftar</a>
+    </div>
+  </header>
+
+  <!-- Konten Utama -->
+  <main class="hero">
+    <div class="text-section">
+      <h2>Kartini</h2>
+      <p>
+        Raden Ajeng Kartini lahir pada 21 April 1879 di Jepara. Ia berasal dari keluarga bangsawan Jawa. Ayahnya, Raden Mas Adipati Ario Sosroningrat, adalah seorang bupati. Meski ibunya, M.A. Ngasirah, bukan dari keluarga bangsawan, Kartini beruntung bisa bersekolah di Europeesche Lagere School (ELS) hingga usia 12 tahun. Di sanalah ia belajar bahasa Belanda, yang menjadi bekal penting dalam hidupnya.
+
+Masa Pingitan dan Ide-ide Progresif
+Setelah usia 12 tahun, Kartini harus menjalani masa pingitan, sebuah tradisi yang mengharuskannya tinggal di dalam rumah. Namun, masa ini justru menjadi waktu di mana pemikirannya berkembang pesat. Dengan kemampuan bahasa Belanda, ia aktif membaca buku, majalah, dan koran Eropa yang membahas tentang kemajuan, emansipasi, dan kesetaraan. Ia mulai prihatin dengan nasib perempuan pribumi yang tidak berhak mendapatkan pendidikan. Melalui surat-surat korespondensinya dengan teman-teman di Belanda, ia menuangkan gagasan-gagasan progresifnya tentang pentingnya pendidikan bagi perempuan.
+
+Perjuangan dan Sekolah Kartini
+Meskipun terikat tradisi, Kartini tidak menyerah. Ia mulai mengumpulkan teman-teman perempuannya untuk diajarkan membaca, menulis, dan keterampilan lainnya. Ini merupakan langkah awal dari cita-citanya mendirikan sekolah. Setelah menikah dengan Raden Adipati Joyodiningrat, suaminya mendukung penuh perjuangannya. Bersama sang suami, ia akhirnya mendirikan sekolah perempuan di kompleks kantor bupati Rembang, yang kemudian menjadi cikal bakal Sekolah Kartini.
+
+Akhir Hayat dan Warisan
+Perjuangan Kartini tidak berlangsung lama. Ia meninggal pada 17 September 1904 di usia 25 tahun, tak lama setelah melahirkan putranya. Meski hidupnya singkat, pemikirannya abadi. Kumpulan surat-suratnya diterbitkan menjadi buku "Habis Gelap Terbitlah Terang", yang menginspirasi banyak orang. Presiden Soekarno kemudian menetapkannya sebagai Pahlawan Kemerdekaan Nasional dan tanggal kelahirannya, 21 April, sebagai Hari Kartini, untuk mengenang perjuangan dan jasanya dalam memajukan kaum perempuan Indonesia.
+      </p>
+
+      
+
+      <a href="../patriotid_landingpage/landingpage.html#profil" class="btn-back">← Kembali</a>
+    </div>
+
+    <div class="image-section">
+      <img src="../kartini-2.png" alt="kartini-2" />
+    </div>
+  </main>
+</body>
+</html>
+</file>
+
+<file path="patriotid_landingpage/landingpage.css">
+/* RESET */
+* {
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family:'Poppins', sans-serif;
+}
+
+body {
+  background: #fff; 
+  color: #111;}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.logo span {
+  color: #e60000;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #ff0000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .login {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #e60000;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.auth-buttons .daftar {
+  background-color: #e60000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.auth-buttons .login:hover {
+  background-color: #ddd;
+}
+
+.auth-buttons .daftar:hover {
+  color: #fff;
+  background-color: #b30000;
+}
+
+/* HERO */
+.hero {
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between;
+  padding:80px 60px;
+}
+
+.hero-text {
+  max-width:50%;
+}
+
+.hero-text h2 {
+  font-size:42px; 
+  font-weight:800; 
+  margin:10px 0;
+}
+
+.hero-text p {
+  color:#555; 
+  margin-bottom:20px;
+}
+
+.buttons {
+  display:flex; 
+  gap:15px;
+}
+
+.btn-red {
+  background:#e63946; 
+  color:#fff; 
+  padding:12px 24px; 
+  border-radius:30px; 
+  text-decoration:none;
+}
+
+.btn-outline {
+  color:#e63946; 
+  padding:12px 24px;
+}
+
+.hero-img img {
+  width:420px; 
+  max-width:100%;
+}
+
+/* PROKLAMASI */
+.proklamasi {
+  height: 350px;
+  display:block; 
+  padding-top: 20px; 
+  padding-left: 60px; 
+  padding-right: 60px; 
+  background:#ffffff;
+}
+
+.prok-box {
+  display:flex; 
+  justify-content:space-around; 
+  background:#fff;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1); 
+  border-radius:10px;
+  padding:30px; 
+  margin-bottom:60px;
+  margin-top: -75px;
+}
+
+.prok-box h3 {
+  color:#e63946; 
+  font-size:16px;
+}
+
+.prok-desc {
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center;
+}
+
+.prok-desc .text {
+  max-width:50%;
+}
+
+.prok-desc h2 {
+  font-size:32px; 
+  margin-bottom:15px;
+}
+
+.prok-desc h2 span {
+  color:#e63946;
+}
+
+.prok-desc img {
+  width:380px;
+}
+
+.text p {
+  margin-bottom: 40px; /* jarak antara teks dan tombol */
+}
+
+.btn-baca {
+  margin-top: 8px; /* opsional tambahan jarak lagi */
+}
+
+/* PROFIL PAHLAWAN */
+.profil {
+  padding:80px 60px; 
+  text-align:center;
+}
+
+.profil h2 {
+  font-size:32px; 
+  margin-bottom:60px;
+}
+
+.profil h2 span {
+  color:#e63946;
+}
+
+.pahlawan-container {
+  display:grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  justify-items:center; 
+  gap:40px; 
+  align-items: center;
+}
+
+.pahlawan-card {
+  text-align:center; 
+  width:180px; 
+  transition:0.3s;
+}
+
+.pahlawan-card:hover {
+  transform:translateY(-10px);
+}
+
+.pahlawan-card img {
+  width:180px; 
+  height:180px; 
+  border-radius:50%;
+  object-fit:cover; 
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
+
+.pahlawan-card h3 {
+  font-size:16px; 
+  margin-top:10px;
+}
+
+.pahlawan-card p {
+  font-size:14px; 
+  color:#555;
+}
+
+.arrow {
+  display: inline-block;
+  font-size: 20px;
+  color: #000;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.arrow:hover {
+  color: #e63946;
+  transform: translateX(5px);
+}
+
+/* TEMPAT BERSEJARAH */
+.tempat {
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center; 
+  padding:80px 60px; 
+  background:#ffffff;
+}
+
+.tempat .text {
+  flex: 1; 
+  max-width:50%;
+}
+
+.tempat h2 {
+  font-size:40px; 
+  margin-bottom:28px;
+}
+
+.tempat h2 span {
+  color:#e63946;
+}
+
+.tempat ul {
+  list-style:none;
+}
+
+.tempat ul li {
+  margin:10px 0; 
+  color:#444;
+}
+
+.gallery {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  /* hanya tampilkan 2 gambar di awal */
+  width: calc(220px * 2 + 10px);
+}
+
+.gallery img {
+  width: 220px;
+  flex-shrink: 0; /* mencegah gambar mengecil */
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  scroll-snap-align: start;
+}
+
+/* Hilangkan scrollbar Chrome */
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+
+/* TRAGEDI */
+.tragedi {
+  height: 700px;
+  padding:80px 60px; 
+  text-align:center;
+}
+
+.tragedi h2 {
+  font-size:32px; 
+  margin-bottom:50px;
+}
+
+.tragedi h2 span {
+  color:#e63946;
+}
+
+.tragedi-container {
+  display:flex; 
+  flex-wrap:wrap; 
+  justify-content:center; 
+  gap:30px;
+}
+
+.tragedi .card {
+  height: 450px;
+  width:300px; 
+  background:#fff; 
+  border-radius:15px; 
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  overflow:hidden; 
+  text-align:left;
+}
+
+.tragedi .card img {
+  width:100%; 
+  height:180px; 
+  object-fit:cover;
+}
+
+.tragedi .card h3 {
+  padding:15px; 
+  font-size:18px;
+}
+
+.tragedi .card p {
+  padding:0 15px 20px; 
+  color:#555;
+}
+
+.tragedi .card a {
+  margin:0 15px 20px; 
+  display:inline-block;
+}
+
+/* Tentang */
+.tentang {
+  background: #ffffff;
+  padding: 80px 60px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.tentang h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #222;
+}
+
+.tentang h2 span {
+  color: #d62828;
+  font-size: 20px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.tentang-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 30px;
+  align-items: center;
+  justify-items: center;
+}
+
+.card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 25px;
+  text-align: left;
+  width: 280px;
+  height: 180px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 40px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #b30000;
+  margin-bottom: 8px;
+}
+
+.card p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Posisi tengah (gambar patung) */
+.card.tengah {
+  grid-row: span 2;
+  width: 280px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  box-shadow: none;
+}
+
+.card.tengah img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Layout grid posisi */
+.kiri-atas { grid-column: 1; grid-row: 1; }
+.kanan-atas { grid-column: 3; grid-row: 1; }
+.kiri-bawah { grid-column: 1; grid-row: 2; }
+.kanan-bawah { grid-column: 3; grid-row: 2; }
+
+.kiri-atas,
+.kanan-atas,
+.kiri-bawah,
+.kanan-bawah {
+  height: auto;
+}
+
+/* FOOTER */
+.footer {
+  background: #f9f9f9;
+  padding: 50px 80px;
+  color: #222;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-left {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.footer-logo h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+}
+
+.footer-logo span {
+  color: #e63946;
+}
+
+.footer-left p {
+  margin-top: 12px;
+  color: #444;
+  font-size: 14px;
+  max-width: 350px;
+  line-height: 1.6;
+}
+
+.footer-copy {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #666;
+}
+
+.footer-right {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+  min-width: 300px;
+}
+
+.footer-column h4 {
+  font-size: 16px;
+  color: #000;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+  color: #444;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: #e63946;
+}
+
+/* RESPONSIF - TABLET */
+@media (max-width: 992px) {
+
+  /* NAVBAR */
+  .navbar {
+    padding: 15px 30px;
+  }
+
+  .navbar ul {
+    gap: 20px;
+  }
+
+  /* HERO */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-img img {
+    width: 320px;
+  }
+
+  /* PROKLAMASI */
+  .prok-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .prok-desc {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .prok-desc .text,
+  .prok-desc img {
+    max-width: 100%;
+  }
+
+  /* PROFIL */
+  .pahlawan-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* TEMPAT */
+  .tempat {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .tempat .text {
+    max-width: 100%;
+  }
+
+  .gallery {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* TRAGEDI */
+  .tragedi-container {
+    gap: 20px;
+  }
+
+  /* TENTANG */
+  .tentang-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card.tengah {
+    grid-row: span 1;
+    width: 100%;
+    height: 350px;
+  }
+
+  /* FOOTER */
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-right {
+    justify-content: center;
+  }
+}
+
+
+/* RESPONSIF - HP */
+@media (max-width: 768px) {
+
+  /* NAVBAR */
+  .navbar {
+    padding: 12px 20px;
+  }
+
+  .navbar ul {
+    display: none; /* sembunyikan menu (opsional) */
+  }
+
+  /* HERO */
+  .hero-text h2 {
+    font-size: 30px;
+  }
+
+  .hero-img img {
+    width: 260px;
+  }
+
+  /* PROKLAMASI */
+  .prok-box {
+    padding: 20px;
+  }
+
+  /* PROFIL PAHLAWAN */
+  .pahlawan-container {
+    grid-template-columns: 1fr;
+  }
+
+  .pahlawan-card img {
+    width: 150px;
+    height: 150px;
+  }
+
+  /* TEMPAT */
+  .tempat h2 {
+    font-size: 28px;
+  }
+
+  /* TRAGEDI */
+  .tragedi {
+    padding: 40px 20px;
+    height: auto;
+  }
+
+  .tragedi .card {
+    width: 90%;
+  }
+
+  /* TENTANG */
+  .tentang h2 {
+    font-size: 28px;
+  }
+
+  .tentang-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .card.tengah {
+    height: 280px;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 30px 20px;
+  }
+}
+
+
+/* RESPONSIF - DESKTOP */
+@media (min-width: 1200px) {
+
+  .hero {
+    padding: 100px 120px;
+  }
+
+  .tempat {
+    padding: 100px 120px;
+  }
+
+  .profil {
+    padding: 100px 120px;
+  }
+
+  .footer {
+    padding: 60px 120px;
+  }
+
+  .pahlawan-card img {
+    width: 200px;
+    height: 200px;
+  }
+
+}
+</file>
+
+<file path="patriotid_landingpage/landingpage.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PatriotID - Kenang Jasa Pahlawan</title>
+  <link rel="stylesheet" href="landingpage.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../logo.png" alt="Logo PatriotID">
+      <h1>Patriot<span>ID</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#profil">Pahlawan</a></li>
+        <li><a href="#tempat">Tempat</a></li>
+        <li><a href="#tragedi">Tragedi</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="../patriotid_login/login.php" class="login">Login</a>
+      <a href="../patriotid_daftar/daftar.html" class="daftar">Daftar</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="beranda">
+    <div class="hero-text">
+      <p>Jasa pahlawan adalah bekal masa depan.</p>
+      <h2>Kenang Jasanya,<br>Kobarkan Semangatnya</h2>
+      <p>Semangat juang para pahlawan adalah api abadi yang takkan pernah padam.</p>
+      <div class="buttons">
+        <a href="#" class="btn-red">Lebih Lanjut</a>
+        <a href="#" class="btn-outline">More Detail</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="../soekarno.png" alt="Soekarno">
+    </div>
+  </section>
+
+<!-- Proklamasi -->
+  <section class="proklamasi">
+    <div class="prok-box">
+      <div><h3>Waktu</h3><p>17 Agustus 1945</p></div>
+      <div><h3>Tempat</h3><p>Jl. Pegangsaan Timur</p></div>
+      <div><h3>Dibacakan oleh</h3><p>Ir. Soekarno</p></div>
+    </div>
+    <div class="prok-desc">
+      <div class="text">
+        <h2>Proklamasi <span>Hari Merdeka</span></h2>
+        <p>Proklamasi Kemerdekaan Indonesia merupakan momen paling bersejarah yang menjadi tonggak lahirnya bangsa Indonesia. 
+        Pada tanggal 17 Agustus 1945, Ir. Soekarno membacakan teks proklamasi di kediamannya di Jakarta.</p>
+        <a href="#" class="btn-red">Baca Selengkapnya</a>
+      </div>
+      <img src="../peta-indonesia.png" alt="Peta Indonesia">
+    </div>
+  </section>
+
+  <!-- Profil Pahlawan -->
+  <section class="profil" id="profil">
+    <h2>Profil <span>Pahlawan</span></h2>
+    <div class="pahlawan-container">
+      <div class="pahlawan-card">
+        <img src="../soekarno-profil.png">
+        <h3>Ir. Soekarno</h3>
+        <p>Blitar</p>
+        <a href="../patriotid_soekarno/soekarno.html" class="arrow">→</a>
+      </div>
+      <div class="pahlawan-card">
+        <img src="../sudirman-profil.png">
+        <h3>Jendral Sudirman</h3>
+        <p>Yogyakarta</p>
+        <a href="../patriotid_sudirman/sudirman.html" class="arrow">→</a>
+      </div>
+      <div class="pahlawan-card">
+        <img src="../kartini-profil.png">
+        <h3>R.A. Kartini</h3>
+        <p>Jepara</p>
+        <a href="../patriotid_kartini/kartini.html" class="arrow">→</a>
+      </div>
+      <div class="pahlawan-card">
+        <img src="../dewantara-profil.png">
+        <h3>Ki Hajar Dewantara</h3>
+        <p>Jombang</p>
+        <a href="../patriotid_dewantara/dewantara.html" class="arrow">→</a>
+      </div>
+      <div class="pahlawan-card">
+        <img src="../diponegoro-profil.png">
+        <h3>Pangeran Diponegoro</h3>
+        <p>Yogyakarta</p>
+        <a href="../patriotid_diponegoro/diponegoro.html" class="arrow">→</a>
+      </div>
+      <div class="pahlawan-card">
+        <img src="../pattimura-profil.png">
+        <h3>Kapitan Pattimura</h3>
+        <p>Maluku</p>
+        <a href="../patriotid_pattimura/pattimura.html" class="arrow">→</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tempat Bersejarah -->
+  <section class="tempat" id="tempat">
+    <div class="gallery">
+      <a href="../patriotid_borobudur/borobudur.html"><img src="../borobudur.png" alt="Borobudur"></a>
+      <a href="../patriotid_prambanan/prambanan.html"><img src="../prambanan.png" alt="Prambanan"></a>
+      <a href="../patriotid_monas/monas.html"><img src="../monas.png" alt="Monas"></a>
+      <a href="../patriotid_kota-tua/kota-tua.html"><img src="../kota-tua.png" alt="Kota Tua"></a>
+      <a href="../patriotid_taman-sari/taman-sari.html"><img src="../taman-sari.png" alt="Taman Sari"></a>
+    </div>
+    <div class="text">
+      <h2>Tempat <span>Bersejarah</span> di Indonesia</h2>
+      <ul>
+        <li>Candi Borobudur (Magelang)</li>
+        <li>Kota Tua (Jakarta)</li>
+        <li>Taman Sari (Jawa Barat)</li>
+        <li>Monumen Nasional (Jakarta Pusat)</li>
+        <li>Candi Prambanan (Yogyakarta)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Tragedi Bersejarah -->
+  <section class="tragedi" id="tragedi">
+    <h2>Tragedi <span>Bersejarah</span></h2>
+    <div class="tragedi-container">
+      <div class="card">
+        <img src="../pki.png" alt="">
+        <h3>Tragedi Lubang Buaya</h3>
+        <p>Pemberontakan G30S/PKI yang menewaskan pahlawan revolusi.</p>
+        <a href="../patriotid_pki/pki.html" class="btn-red">Selengkapnya</a>
+      </div>
+      <div class="card">
+        <img src="../trisakti.png" alt="">
+        <h3>Tragedi Trisakti</h3>
+        <p>Peristiwa berdarah pada masa reformasi tahun 1998 di Jakarta.</p>
+        <a href="#" class="btn-red">Selengkapnya</a>
+      </div>
+      <div class="card">
+        <img src="../lautanapi.png" alt="">
+        <h3>Bandung Lautan Api</h3>
+        <p>Perjuangan rakyat Bandung membumihanguskan kota agar tidak direbut musuh.</p>
+        <a href="#" class="btn-red">Selengkapnya</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tentang Pahlawan Nusantara -->
+<section class="tentang" id="tentang"> 
+  <h2><span>PatriotID</span><br>Tentang Pahlawan Nusantara</h2>
+
+  <div class="tentang-grid">
+    <div class="card kiri-atas">
+      <img src="../icon-sejarah.png" alt="Sejarah">
+      <h3>Sejarah</h3>
+      <p>Situs ini didedikasikan untuk <br>mengabadikan jasa para pahlawan <br>yang berjuang demi kemerdekaan <br>bangsa.</p>
+    </div>
+
+    <div class="card kanan-atas">
+      <img src="../icon-patriotisme.png" alt="Patriotisme">
+      <h3>Patriotisme</h3>
+      <p>Mendorong rasa cinta tanah air dan <br>menumbuhkan semangat <br>kepahlawanan.</p>
+    </div>
+
+    <div class="card tengah">
+      <img src="../patung.png" alt="Patung Pahlawan">
+    </div>
+
+    <div class="card kiri-bawah">
+      <img src="../icon-cable.png" alt="Cable Services">
+      <h3>Cable Services</h3>
+      <p>Stay connected with high-quality cable <br>services that deliver reliable and fast <br>internet, television.</p>
+    </div>
+
+    <div class="card kanan-bawah">
+      <img src="../icon-edukasi.png" alt="Edukasi">
+      <h3>Edukasi</h3>
+      <p>Menyajikan biografi dan kontribusi <br>pahlawan untuk menginspirasi <br>generasi muda.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Kiri -->
+    <div class="footer-left">
+      <div class="footer-logo">
+        <img src="../logo.png" alt="PatriotID Logo">
+        <h3>PATRIOT<span>ID</span></h3>
+      </div>
+      <p>"Pahlawan bukan hanya mereka yang berperang, tapi juga mereka yang menjaga budaya bangsa."</p>
+      <p class="footer-copy">2025 | All rights reserved</p>
+    </div>
+
+    <!-- Tengah (kosong agar ada jarak visual di layout) -->
+    <div class="footer-middle"></div>
+
+    <!-- Kanan -->
+    <div class="footer-right">
+      <div class="footer-column">
+        <h4>Tentang</h4>
+        <ul>
+          <li><a href="#">Projek</a></li>
+          <li><a href="#">Kontak</a></li>
+          <li><a href="#">Tentang kami</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Ikuti Kami</h4>
+        <ul class="social">
+          <li><a href="#">𝕏 @patriotid</a></li>
+          <li><a href="#">📷 @patriotid</a></li>
+          <li><a href="#">📘 @patriotid</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+</file>
+
+<file path="patriotid_login/login.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  width: 90%;
+  max-width: 1100px;
+  height: 600px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== Bagian kiri ===== */
+.left-section {
+  flex: 1;
+  background: linear-gradient(180deg, #800000, #400000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.garuda {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+/* ===== Bagian kanan ===== */
+.right-section {
+  flex: 1;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-box {
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.logo {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 28px;
+  color: #000;
+}
+
+p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* ===== Input ===== */
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.forgot {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  color: #a00000;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+/* ===== Tombol login ===== */
+.btn-login {
+  background-color: #800000;
+  color: #fff;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.btn-login:hover {
+  background-color: #a00000;
+}
+
+/* ===== Login sosial ===== */
+.social-login {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-google, .btn-facebook {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-google:hover, .btn-facebook:hover {
+  background-color: #f5f5f5;
+}
+
+/* ===== Link daftar ===== */
+.register-link {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #a00000;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.alert-error {
+  background-color: #ffe0e0;
+  color: #a00000;
+  border: 1px solid #f5c6c6;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.alert-success {
+  background-color: #e0ffe0;
+  color: #006600;
+  border: 1px solid #b3e6b3;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* ===== Responsif ===== */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-section {
+    height: 250px;
+  }
+
+  .garuda {
+    width: 40%;
+  }
+}
+</file>
+
+<file path="patriotid_pattimura/pattimura.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fffaf9;
+  color: #222;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.logo span {
+  color: #e60000;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #e60000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .login {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #e60000;
+  font-weight: 500;
+}
+
+.auth-buttons .daftar {
+  background-color: #e60000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.auth-buttons .login:hover {
+  background-color: #ddd;
+}
+
+.auth-buttons .daftar:hover {
+  color: #fff;
+  background-color: #b30000;
+}
+
+/* ===== Konten Utama ===== */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 60px 100px;
+}
+
+.text-section {
+  flex: 1;
+}
+
+.text-section h2 {
+  font-size: 32px;
+  color: #c60000;
+  margin-bottom: 20px;
+}
+
+.text-section h3 {
+  margin-top: 20px;
+  color: #b00000;
+  font-size: 20px;
+}
+
+.text-section p {
+  margin-top: 10px;
+  line-height: 1.7;
+  color: #444;
+  text-align: justify;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #c60000;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #a00000;
+}
+
+/* ===== Gambar Pahlawan ===== */
+.image-section img {
+  width: 340px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section img {
+    width: 80%;
+  }
+
+  .text-section {
+    text-align: left;
+  }
+}
+</file>
+
+<file path="patriotid_pattimura/pattimura.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Pahlawan - Kaoitan Pattimura| PatriotID</title>
+  <link rel="stylesheet" href="pattimura.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../logo.png" alt="Logo PatriotID">
+      <h1>Patriot<span>ID</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../patriotid_landingpage/landingpage.html#beranda">Beranda</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#profil">Pahlawan</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tempat">Tempat</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tragedi">Tragedi</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="../patriotid_login/login.html" class="login">Login</a>
+      <a href="../patriotid_daftar/daftar.html" class="daftar">Daftar</a>
+    </div>
+  </header>
+
+  <!-- Konten Utama -->
+  <main class="hero">
+    <div class="text-section">
+      <h2>Kapitan Pattimura</h2>
+      <p>
+        Kapitan Pattimura, atau nama aslinya Thomas Matulessy, berasal dari Maluku. Latar belakang perlawanannya adalah kembalinya Belanda ke Maluku setelah sempat dikuasai Inggris. Belanda kembali menerapkan kebijakan yang sangat menindas rakyat, seperti monopoli perdagangan rempah, kerja rodi (kerja paksa), dan pajak yang tinggi. Kebijakan-kebijakan ini membuat rakyat Maluku menderita dan memicu kemarahan.
+
+Perjuangan dan Pengepungan Benteng Duurstede
+Pada 16 Mei 1817, Pattimura memimpin perlawanan bersenjata. Puncak dari perlawanan ini adalah serangan dan perebutan Benteng Duurstede di Pulau Saparua. Dalam serangan itu, seluruh penghuni benteng Belanda, termasuk Residen van den Berg, tewas. Kemenangan ini membangkitkan semangat rakyat dan membuat perlawanan meluas ke seluruh Maluku.
+
+Akhir Perjuangan dan Pengkhianatan
+Belanda mengirimkan pasukan besar-besaran untuk memadamkan pemberontakan. Setelah berbulan-bulan berjuang, Pattimura akhirnya tertangkap pada November 1817 akibat pengkhianatan dari salah satu kepala desa. Ia kemudian dibawa ke Ambon. Meskipun ditawari pengampunan oleh Belanda, ia menolak. Pada 16 Desember 1817, Pattimura dieksekusi dengan cara digantung.
+
+Warisan dan Penghormatan
+Meskipun perjuangan fisiknya berakhir, semangat perlawanan Pattimura tetap hidup. Ia diakui sebagai Pahlawan Nasional Indonesia dan menjadi simbol keberanian dan perlawanan terhadap kolonialisme. Namanya kini diabadikan di berbagai tempat, dan wajahnya tertera pada uang kertas pecahan Rp1.000, sebagai pengingat abadi akan jasa-jasanya.
+      </p>
+
+      
+      <a href="../patriotid_landingpage/landingpage.html#profil" class="btn-back">← Kembali</a>
+    </div>
+
+    <div class="image-section">
+      <img src="../pattimura-2.png" alt="pattimura-2" />
+    </div>
+  </main>
+</body>
+</html>
+</file>
+
+<file path="patriotid_pki/pki.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #fffaf8;
+  color: #222;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.logo span {
+  color: #e60000;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #e60000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .login {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #e60000;
+  font-weight: 500;
+}
+
+.auth-buttons .daftar {
+  background-color: #e60000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.auth-buttons .login:hover {
+  background-color: #ddd;
+}
+
+.auth-buttons .daftar:hover {
+  color: #fff;
+  background-color: #b30000;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  width: 80%;
+  margin: 80px auto;
+  padding: 20px 0;
+}
+
+/* .timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 50%;
+  background: #e63946;
+} */
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 40px 60px;
+  text-align: center;
+  margin: 80px auto;
+}
+
+.timeline-item::before {
+  /* content: "●"; */
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #e63946;
+  font-size: 20px;
+  background: #fffaf8;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.timeline-item h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.timeline-item p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.line {
+  background-color: #e63946;
+  width: 3px;
+  /* height: 120px; */
+  margin: 0 auto;
+  text-align: center;
+}
+
+.line-continer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: #f8f8f8;
+  padding: 40px 60px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo img {
+  width: 35px;
+}
+
+.footer-left h3 {
+  color: #000;
+  font-size: 20px;
+}
+
+.footer-left span {
+  color: #e63946;
+}
+
+.footer-left p {
+  margin-top: 10px;
+  max-width: 350px;
+  color: #333;
+}
+
+.copy {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #666;
+}
+
+.footer-right {
+  display: flex;
+  gap: 80px;
+}
+
+.footer-right div h4 {
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.footer-right div a {
+  display: block;
+  color: #555;
+  text-decoration: none;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.footer-right div a:hover {
+  color: #e63946;
+}
+</file>
+
+<file path="patriotid_pki/pki.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peristiwa Sejarah | PatriotID</title>
+  <link rel="stylesheet" href="pki.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../logo.png" alt="Logo PatriotID">
+      <h1>Patriot<span>ID</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../patriotid_landingpage/landingpage.html#beranda">Beranda</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#profil">Pahlawan</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tempat">Tempat</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tragedi">Tragedi</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="../patriotid_login/login.html" class="login">Login</a>
+      <a href="../patriotid_daftar/daftar.html" class="daftar">Daftar</a>
+    </div>
+  </header>
+
+  <!-- TIMELINE SECTION -->
+  <section class="timeline">
+      <div class="timeline-item">
+        <h3 class="judul">Latar Belakang</h3>
+        <p>Bulan Oktober 1945, suasana Indonesia sangat dinamis. Meskipun Proklamasi Kemerdekaan telah dikumandangkan pada 17 Agustus 1945, pasukan Sekutu yang diboncengi Belanda (NICA) tiba dan berusaha merebut kembali kekuasaan. Ketegangan antara pejuang Indonesia dan pasukan Sekutu mulai meningkat di berbagai daerah, termasuk Surabaya.</p>
+  </div>
+
+    <div class="line" style="height: 100px;"></div>
+  
+  <div class="timeline-item">
+    <h3 class="judul">Puncak Peristiwa</h3>
+    <p>Pada 10 November 1945, terjadi pertempuran besar antara rakyat Surabaya dan pasukan Sekutu. Arek-arek Suroboyo berjuang mempertahankan kota mereka dari serangan udara, laut, dan darat. Pertempuran ini menewaskan ribuan pejuang, namun semangat juang mereka menjadi simbol keberanian rakyat Indonesia melawan penjajahan.</p>
+  </div>
+  
+  <div class="line" style="height: 200px;"></div>
+  
+    <div class="timeline-item">
+      <h3 class="judul">Setelah Peristiwa</h3>
+      <p>Setelah pertempuran berakhir, Surabaya hancur parah, tetapi semangat perlawanan rakyat tidak padam. Peristiwa ini dikenang sebagai Hari Pahlawan setiap tanggal 10 November, untuk menghormati keberanian dan pengorbanan para pejuang yang gugur demi kemerdekaan Indonesia.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="footer-logo">
+          <img src="../logo.png" alt="PatriotID">
+          <h3>PATRIOT<span>ID</span></h3>
+        </div>
+        <p>pahlawan bukan hanya mereka yang berperang, tapi juga mereka yang menjaga budaya bangsa.</p>
+        <p class="copy">2025 | All rights reserved</p>
+      </div>
+
+      <div class="footer-right">
+        <div>
+          <h4>Tentang</h4>
+          <a href="#">Projek</a>
+          <a href="#">Kontak</a>
+          <a href="#">Tentang kami</a>
+        </div>
+        <div>
+          <h4>Ikuti Kami</h4>
+          <a href="#">X @patriotid</a>
+          <a href="#">Instagram @patriotid</a>
+          <a href="#">Facebook @patriotid</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+</file>
+
+<file path="patriotid_soekarno/soekarno.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fffaf9;
+  color: #222;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.logo span {
+  color: #e60000;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #e60000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .login {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #e60000;
+  font-weight: 500;
+}
+
+.auth-buttons .daftar {
+  background-color: #e60000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.auth-buttons .login:hover {
+  background-color: #ddd;
+}
+
+.auth-buttons .daftar:hover {
+  color: #fff;
+  background-color: #b30000;
+}
+
+/* ===== Konten Utama ===== */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 60px 100px;
+}
+
+.text-section {
+  flex: 1;
+}
+
+.text-section h2 {
+  font-size: 32px;
+  color: #c60000;
+  margin-bottom: 20px;
+}
+
+.text-section h3 {
+  margin-top: 20px;
+  color: #b00000;
+  font-size: 20px;
+}
+
+.text-section p {
+  margin-top: 10px;
+  line-height: 1.7;
+  color: #444;
+  text-align: justify;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #c60000;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #a00000;
+}
+
+/* ===== Gambar Pahlawan ===== */
+.image-section img {
+  width: 340px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section img {
+    width: 80%;
+  }
+
+  .text-section {
+    text-align: left;
+  }
+}
+</file>
+
+<file path="patriotid_soekarno/soekarno.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Pahlawan - Ir. Soekarno | PatriotID</title>
+  <link rel="stylesheet" href="soekarno.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../logo.png" alt="Logo PatriotID">
+      <h1>Patriot<span>ID</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../patriotid_landingpage/landingpage.html#beranda">Beranda</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#profil">Pahlawan</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tempat">Tempat</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tragedi">Tragedi</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="../patriotid_login/login.html" class="login">Login</a>
+      <a href="../patriotid_daftar/daftar.html" class="daftar">Daftar</a>
+    </div>
+  </header>
+
+  <!-- Konten Utama -->
+  <main class="hero">
+    <div class="text-section">
+      <h2>Ir. Soekarno</h2>
+      <p>
+        Ir. Soekarno, lahir dengan nama Koesno Sosrodihardjo pada 6 Juni 1901 di Surabaya, 
+        ia menempuh pendidikan di Hogere Burgerschool (HBS) di Surabaya dan Technische Hoogeschool te Bandoeng (sekarang ITB). 
+        Pada masa kuliah, ia mulai aktif dalam pergerakan nasional dan mendirikan Partai Nasional Indonesia (PNI) pada 1927. 
+        Perjuangannya yang kolosal melawan kolonialisme Belanda menyebabkan ia beberapa kali dipenjara dan diasingkan, 
+        termasuk ke Ende, Flores, di mana ia merumuskan gagasan Pancasila.
+      </p>
+
+      <h3>Proklamator dan Presiden Pertama</h3>
+      <p>
+        Pada masa pendudukan Jepang, Soekarno terlibat dalam Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan Indonesia (BPUPKI) 
+        dan menyampaikan pidato tentang Pancasila pada 1 Juni 1945. 
+        Puncaknya, pada 17 Agustus 1945, Soekarno bersama Moh. Hatta memproklamasikan kemerdekaan Indonesia. 
+        Keesokan harinya, ia diangkat sebagai presiden pertama.
+      </p>
+
+      <h3>Masa Kepresidenan dan Akhir Kekuasaan</h3>
+      <p>
+        Sebagai presiden, Soekarno menghadapi tantangan berat, termasuk agresi militer Belanda. 
+        Ia berhasil mempertahankan kemerdekaan dan memainkan peran penting dalam dunia internasional melalui Konferensi Asia-Afrika pada 1955. 
+        Namun, kekuasaannya berangsur melemah setelah peristiwa Gerakan 30 September 1965. 
+        Pada 1966, ia menyerahkan kekuasaan kepada Soeharto melalui Surat Perintah Sebelas Maret (Supersemar). 
+        Soekarno wafat pada 21 Juni 1970, meninggalkan warisan berupa kemerdekaan dan ideologi Pancasila.
+      </p>
+
+      <a href="../patriotid_landingpage/landingpage.html#profil" class="btn-back">← Kembali</a>
+    </div>
+
+    <div class="image-section">
+      <img src="../soekarno-2.png" alt="Ir. Soekarno" />
+    </div>
+  </main>
+</body>
+</html>
+</file>
+
+<file path="patriotid_sudirman/sudirman.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fffaf9;
+  color: #222;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.logo span {
+  color: #e60000;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #e60000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .login {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #e60000;
+  font-weight: 500;
+}
+
+.auth-buttons .daftar {
+  background-color: #e60000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.auth-buttons .login:hover {
+  background-color: #ddd;
+}
+
+.auth-buttons .daftar:hover {
+  color: #fff;
+  background-color: #b30000;
+}
+
+/* ===== Konten Utama ===== */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 60px 100px;
+}
+
+.text-section {
+  flex: 1;
+}
+
+.text-section h2 {
+  font-size: 32px;
+  color: #c60000;
+  margin-bottom: 20px;
+}
+
+.text-section h3 {
+  margin-top: 20px;
+  color: #b00000;
+  font-size: 20px;
+}
+
+.text-section p {
+  margin-top: 10px;
+  line-height: 1.7;
+  color: #444;
+  text-align: justify;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #c60000;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #a00000;
+}
+
+/* ===== Gambar Pahlawan ===== */
+.image-section img {
+  width: 340px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section img {
+    width: 80%;
+  }
+
+  .text-section {
+    text-align: left;
+  }
+}
+</file>
+
+<file path="patriotid_sudirman/sudirman.html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Pahlawan - Ir. Soekarno | PatriotID</title>
+  <link rel="stylesheet" href="sudirman.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../logo.png" alt="Logo PatriotID">
+      <h1>Patriot<span>ID</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../patriotid_landingpage/landingpage.html#beranda">Beranda</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#profil">Pahlawan</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tempat">Tempat</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tragedi">Tragedi</a></li>
+        <li><a href="../patriotid_landingpage/landingpage.html#tentang">Tentang</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="../patriotid_login/login.html" class="login">Login</a>
+      <a href="../patriotid_daftar/daftar.html" class="daftar">Daftar</a>
+    </div>
+  </header>
+
+  <!-- Konten Utama -->
+  <main class="hero">
+    <div class="text-section">
+      <h2>Jendral Sudirman</h2>
+      <p>
+        Jenderal Besar Soedirman adalah salah satu tokoh paling heroik dan dihormati dalam sejarah Indonesia. Ia lahir di Dukuh Rembang, Purbalingga, pada 24 Januari 1916. Sejak muda, Soedirman dikenal sebagai pribadi yang cerdas, tekun, dan memiliki jiwa kepemimpinan yang kuat. Ia aktif dalam organisasi kepanduan Hizbul Wathan dan menjadi guru di sekolah Muhammadiyah.
+
+Perjalanan Militer dan Perang Kemerdekaan
+Karir militernya dimulai pada masa pendudukan Jepang, di mana ia bergabung dengan pasukan Pembela Tanah Air (PETA). Di sini, Soedirman menunjukkan bakat strategis dan kemampuan taktis yang luar biasa. Setelah Indonesia merdeka, ia terpilih sebagai Panglima Besar Tentara Keamanan Rakyat (TKR), cikal bakal TNI, pada 12 November 1945. Meskipun usianya masih sangat muda, 29 tahun, ia berhasil menyatukan berbagai laskar perjuangan menjadi satu kekuatan militer yang solid.
+
+Puncak perjuangannya terjadi selama Agresi Militer Belanda II pada 19 Desember 1948. Saat Yogyakarta, ibu kota Republik Indonesia saat itu, diduduki Belanda, Soedirman yang sedang sakit parah (menderita TBC) menolak untuk menyerah. Ia memutuskan untuk memimpin perang gerilya dari dalam hutan. Dengan ditandu, ia memimpin pasukannya bergerilya selama tujuh bulan melintasi gunung, lembah, dan hutan di Jawa.  Aksi heroik ini menjadi simbol perlawanan tak kenal lelah terhadap penjajah, menunjukkan kepada dunia bahwa Republik Indonesia masih ada dan terus berjuang.
+
+Akhir Hayat dan Penghargaan
+Setelah perjuangan gerilya usai, Soedirman kembali ke Yogyakarta. Kondisi kesehatannya terus menurun akibat TBC yang parah. Ia meninggal pada 29 Januari 1950 di Magelang. Atas jasa-jasanya yang tak terhitung, ia dianugerahi gelar Pahlawan Nasional dan pangkat Jenderal Besar Anumerta, sebuah pangkat kehormatan tertinggi di TNI yang hanya disematkan kepada tiga tokoh Indonesia. Soedirman dikenang sebagai sosok yang tidak hanya ahli dalam strategi militer, tetapi juga sebagai pemimpin yang sederhana, teguh pendirian, dan sangat mencintai rakyatnya.
+      </p>
+
+      
+      </p>
+
+      
+      <a href="../patriotid_landingpage/landingpage.html#profil" class="btn-back">← Kembali</a>
+    </div>
+
+    <div class="image-section">
+      <img src="../sudirman-2.png" alt="Ir. Soekarno" />
+    </div>
+  </main>
+</body>
+</html>
+</file>
+
+<file path="README.md">
+# pjbl_website
+</file>
+
+</files>

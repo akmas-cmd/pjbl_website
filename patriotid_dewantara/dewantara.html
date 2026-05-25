@@ -55,11 +55,67 @@ Setelah kemerdekaan Indonesia, Ki Hajar Dewantara menjabat sebagai Menteri Penga
 
       
       <a href="../patriotid_landingpage/landingpage.html#profil" class="btn-back">← Kembali</a>
+      <button id="btn-fav-soekarno"
+        class="btn-favorit"
+        onclick="toggleFavorit('soekarno')"
+        title="Simpan ke Favorit">🤍</button>
+
+<div class="toast-fav" id="toast-fav"></div>
+    </div>
     </div>
 
     <div class="image-section">
       <img src="../dewantara-2.png" alt="dewantara-2" />
     </div>
   </main>
+  <script>
+  const STORAGE_KEY = 'patriotid_favorit';
+
+  function getFavorit() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+
+  function saveFavorit(list) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+
+  function toggleFavorit(id) {
+    let list = getFavorit();
+    const idx = list.indexOf(id);
+    if (idx === -1) {
+      list.push(id);
+      updateTombol(id, true);
+      tampilToast('❤️ Ditambahkan ke favorit!');
+    } else {
+      list.splice(idx, 1);
+      updateTombol(id, false);
+      tampilToast('🗑️ Dihapus dari favorit');
+    }
+    saveFavorit(list);
+  }
+
+  function updateTombol(id, aktif) {
+    const btn = document.getElementById('btn-fav-' + id);
+    if (!btn) return;
+    btn.classList.toggle('aktif', aktif);
+    btn.title = aktif ? 'Hapus dari Favorit' : 'Simpan ke Favorit';
+    btn.textContent = aktif ? '❤️' : '🤍';
+  }
+
+  let toastTimer;
+  function tampilToast(pesan) {
+    const t = document.getElementById('toast-fav');
+    t.textContent = pesan;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const id = 'soekarno';
+    updateTombol(id, getFavorit().includes(id));
+  });
+</script>
 </body>
 </html>

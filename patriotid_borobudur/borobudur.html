@@ -32,7 +32,14 @@
 
   <!-- Konten Artikel -->
   <main class="artikel">
+    <div class="artikel-header">
     <h2>Candi Borobudur</h2>
+    <button id="btn-fav-borobudur"
+      class="btn-favorit"
+      onclick="toggleFavorit('borobudur')"
+      title="Simpan ke Favorit">🤍
+    </button>
+  </div>
     <div class="artikel-content">
       <div class="left">
         <p><b>Masa Pembangunan dan Kejayaan (Abad ke-8)</b><br>
@@ -91,6 +98,56 @@
       </div>
     </div>
   </footer>
+
+  <script>
+  const STORAGE_KEY = 'patriotid_favorit';
+
+  function getFavorit() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+
+  function saveFavorit(list) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+
+  function toggleFavorit(id) {
+    let list = getFavorit();
+    const idx = list.indexOf(id);
+    if (idx === -1) {
+      list.push(id);
+      updateTombol(id, true);
+      tampilToast('❤️ Ditambahkan ke favorit!');
+    } else {
+      list.splice(idx, 1);
+      updateTombol(id, false);
+      tampilToast('🗑️ Dihapus dari favorit');
+    }
+    saveFavorit(list);
+  }
+
+  function updateTombol(id, aktif) {
+    const btn = document.getElementById('btn-fav-' + id);
+    if (!btn) return;
+    btn.classList.toggle('aktif', aktif);
+    btn.title = aktif ? 'Hapus dari Favorit' : 'Simpan ke Favorit';
+    btn.textContent = aktif ? '❤️' : '🤍';
+  }
+
+  let toastTimer;
+  function tampilToast(pesan) {
+    const t = document.getElementById('toast-fav');
+    t.textContent = pesan;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const id = 'soekarno';
+    updateTombol(id, getFavorit().includes(id));
+  });
+</script>
 
 </body>
 </html>

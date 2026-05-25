@@ -64,6 +64,11 @@ body {
   gap: 10px;
 }
 
+.auth-buttons a img {
+  width: 15px;
+  height: 15px;
+}
+
 .auth-buttons .login {
   background-color: #fff;
   border: 1px solid #ddd;

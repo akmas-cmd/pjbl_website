@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PatriotID - Daftar</title>
+  <link rel="stylesheet" href="daftar.css" />
+</head>
+<body>
+
+  <div class="auth-container">
+
+    <!-- Bagian kiri — sama persis dengan login -->
+    <div class="left-section">
+      <img src="../garuda.png" alt="Garuda Pancasila" class="garuda">
+    </div>
+
+    <!-- Bagian kanan -->
+    <div class="right-section">
+      <div class="form-box">
+        <img src="../logo.png" alt="Logo PatriotID" class="logo">
+        <h2>Daftar</h2>
+        <p>Selamat Datang di PatriotID</p>
+
+        <form method="POST" action="">
+
+          <div class="input-group">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+          </div>
+
+          <div class="input-group">
+            <label for="email">Email atau Nomor Telepon</label>
+            <input type="text" id="email" name="email" placeholder="Masukkan email atau nomor telepon" required>
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="pass1">Password</label>
+              <div class="input-wrapper">
+                <input type="password" id="pass1" name="password" placeholder="Masukkan password" required>
+                <span class="eye-icon" onclick="togglePass('pass1', this)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </span>
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="pass2">Confirm Password</label>
+              <div class="input-wrapper">
+                <input type="password" id="pass2" name="confirm_password" placeholder="Ulangi password" required>
+                <span class="eye-icon" onclick="togglePass('pass2', this)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-daftar">Daftar</button>
+
+          <div class="social-login">
+            <button type="button" class="btn-google">
+              <img src="../google.png" alt="Google" width="16"> Google
+            </button>
+            <button type="button" class="btn-facebook">
+              <img src="../facebook.png" alt="Facebook" width="16"> Facebook
+            </button>
+          </div>
+
+          <p class="register-link">
+            Sudah punya akun? <a href="../patriotid_login/login.php">Masuk</a>
+          </p>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function togglePass(id, icon) {
+      const input = document.getElementById(id);
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.style.opacity = '1';
+      } else {
+        input.type = 'password';
+        icon.style.opacity = '0.5';
+      }
+    }
+  </script>
+
+</body>
+</html>

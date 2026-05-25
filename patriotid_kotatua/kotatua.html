@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Peristiwa Sejarah | PatriotID</title>
-  <link rel="stylesheet" href="pki.css">
+  <title>Kota Tua | PatriotID</title>
+  <link rel="stylesheet" href="kotatua.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
       <img src="../logo.png" alt="Logo PatriotID">
@@ -30,34 +30,47 @@
     </div>
   </header>
 
-  <!-- TIMELINE SECTION -->
-  <section class="timeline">
-      <div class="timeline-item">
-        <h3 class="judul">Latar Belakang</h3>
-        <p>Bulan Oktober 1945, suasana Indonesia sangat dinamis. Meskipun Proklamasi Kemerdekaan telah dikumandangkan pada 17 Agustus 1945, pasukan Sekutu yang diboncengi Belanda (NICA) tiba dan berusaha merebut kembali kekuasaan. Ketegangan antara pejuang Indonesia dan pasukan Sekutu mulai meningkat di berbagai daerah, termasuk Surabaya.</p>
+  <!-- Konten Artikel -->
+  <main class="artikel">
+    <div class="artikel-header">
+    <h2>Kota Tua</h2>
+    <button id="btn-fav-kotatua"
+      class="btn-favorit"
+      onclick="toggleFavorit('kotatua')"
+      title="Simpan ke Favorit">🤍
+    </button>
   </div>
+    <div class="artikel-content">
+      <div class="left">
+        <p><b>Masa Pembangunan dan Kejayaan (Abad ke-8)</b><br>
+        Kota Tua dibangun sekitar tahun 800 Masehi oleh Dinasti Syailendra, sebuah dinasti kerajaan agung berlatar belakang Mahayana yang berkuasa di kawasan Medang Mataram Kuno. Kota ini terletak di kawasan perbukitan Magelang, Jawa Tengah, dan dibangun sebagai tempat pemujaan agama Buddha Mahayana.</p>
 
-    <div class="line" style="height: 100px;"></div>
-  
-  <div class="timeline-item">
-    <h3 class="judul">Puncak Peristiwa</h3>
-    <p>Pada 10 November 1945, terjadi pertempuran besar antara rakyat Surabaya dan pasukan Sekutu. Arek-arek Suroboyo berjuang mempertahankan kota mereka dari serangan udara, laut, dan darat. Pertempuran ini menewaskan ribuan pejuang, namun semangat juang mereka menjadi simbol keberanian rakyat Indonesia melawan penjajahan.</p>
-  </div>
-  
-  <div class="line" style="height: 200px;"></div>
-  
-    <div class="timeline-item">
-  <h3 class="judul">Setelah Peristiwa</h3>
-  <p>Setelah pertempuran berakhir, Surabaya hancur parah, tetapi semangat perlawanan rakyat tidak padam. Peristiwa ini dikenang sebagai Hari Pahlawan setiap tanggal 10 November, untuk menghormati keberanian dan pengorbanan para pejuang yang gugur demi kemerdekaan Indonesia.</p>
-  <button id="btn-fav-pki"
-    class="btn-favorit"
-    onclick="toggleFavorit('pki')"
-    title="Simpan ke Favorit">🤍
-  </button>
-</div>
-  </section>
+        <p>Strukturnya terdiri dari tiga tingkatan yang mewakili alam semesta dalam kosmologi Buddha:
+        <ul>
+          <li><b>Kamadhatu:</b> bagian bawah candi yang melambangkan dunia nafsu.</li>
+          <li><b>Rupadhatu:</b> dunia bentuk, di mana manusia mulai meninggalkan keinginan duniawi.</li>
+          <li><b>Arupadhatu:</b> dunia tanpa bentuk, lambang kesempurnaan tertinggi.</li>
+        </ul></p>
 
-  <!-- FOOTER -->
+        <p><b>Masa Terlantar (Abad ke-10 hingga ke-19)</b><br>
+        Sekitar abad ke-10, Candi Borobudur sempat terlantar akibat perpindahan pusat kerajaan ke Jawa Timur. Gunung berapi dan alam yang berubah turut membuat candi ini tertutup abu vulkanik selama berabad-abad.</p>
+
+        <p>Namun pada abad ke-19, Borobudur ditemukan kembali oleh Sir Thomas Stamford Raffles, Gubernur Jenderal Inggris di Jawa. Ia memerintahkan pembersihan situs dan mulai mendokumentasikan reliefnya.</p>
+      </div>
+
+      <div class="right">
+        <img src="../borobudur-2.png" alt="Candi Borobudur">
+        <p><b>Masa Pemugaran dan Revolusi (Abad ke-19 hingga Sekarang)</b><br>
+        Pemerintah Indonesia bersama UNESCO melakukan pemugaran besar-besaran antara tahun 1975 hingga 1983. Proyek ini berhasil memindahkan dan menyusun kembali lebih dari satu juta batu candi agar tetap kokoh. Sejak saat itu, Candi Borobudur menjadi salah satu warisan dunia paling berharga.</p>
+      </div>
+    </div>
+
+    <div class="gambar-besar">
+      <img src="../borobudur-3.png" alt="Borobudur">
+    </div>
+  </main>
+
+  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-left">
