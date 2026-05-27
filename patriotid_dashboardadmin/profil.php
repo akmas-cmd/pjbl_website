@@ -16,11 +16,13 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
 
+<?php
+  $halaman_aktif = 'data_pahlawan';
+require_once '../patriotid_navbar/navbar.php';
+?>
+
+<div class='layout'>
   <aside class="sidebar">
-    <div class="logo">
-      <img src="assets/logo.png" alt="PatriotID Logo" />
-      <span class="logo-text">PATRIOT<span>ID</span></span>
-    </div>
     <nav>
       <a href="../patriotid_dashboardadmin/dashboard.php" class="nav-item">Dashboard utama</a>
       <a href="../patriotid_dashboardadmin/data_pahlawan.php" class="nav-item">Data Pahlawan</a>
@@ -100,6 +102,7 @@ if (!isset($_SESSION['user_id'])) {
       </div>
     </div>
   </main>
+</div>
 
 </body>
 </html>

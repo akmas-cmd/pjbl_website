@@ -55,6 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>Login</h2>
         <p>Selamat Datang di PatriotID</p>
 
+        <?php if (isset($_GET['status']) && $_GET['status'] === 'daftar_ok'): ?>
+  <div class="alert-success">✅ Pendaftaran berhasil! Silakan login.</div>
+<?php endif; ?>
+
         <?php if ($error): ?>
           <div class="alert-error"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>

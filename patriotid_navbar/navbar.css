@@ -1,0 +1,94 @@
+.topbar {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  height: 56px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-wrap: nowrap;
+  gap: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.topbar-logo img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.topbar-logo-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #e63946;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.topbar-logo-text span {
+  color: #222222;
+}
+
+.topbar-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.topbar-link {
+  font-size: 13.5px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s, font-weight 0.15s;
+}
+
+.topbar-link:hover {
+  color: #e63946;
+}
+
+.topbar-link.active {
+  color: #e63946;
+  font-weight: 700;
+}
+
+.topbar-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.topbar-actions a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.topbar-actions img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  border-radius: 50%;
+  transition: opacity 0.15s;
+}
+
+.topbar-actions img:hover {
+  opacity: 0.75;
+}

@@ -1,0 +1,280 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #fffaf8;
+  color: #222;
+}
+
+/* ══════════════════════════════
+   ARTIKEL
+══════════════════════════════ */
+.artikel {
+  padding: 60px 80px;
+}
+
+.artikel-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #f0f0f0;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.artikel-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #222;
+}
+
+.lokasi-badge {
+  text-align: center;
+  display: block;
+  margin: 0 auto 12px;
+  color: #8B1010;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.deskripsi-intro {
+  text-align: center;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+.artikel-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.left, .right {
+  flex: 1;
+  min-width: 300px;
+}
+
+.left p, .right p {
+  margin-bottom: 24px;
+  text-align: justify;
+  line-height: 1.8;
+  color: #333;
+  font-size: 15px;
+}
+
+.right img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+/* ══════════════════════════════
+   TOMBOL
+══════════════════════════════ */
+.btn-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+}
+
+.btn-back {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8B1010;
+  border: 1.5px solid #8B1010;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.btn-back:hover {
+  background: #fdf0f0;
+}
+
+.btn-nav {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: #8B1010;
+  border: 1.5px solid #8B1010;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.btn-nav:hover {
+  background: #6e0d0d;
+}
+
+.btn-fav {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-fav:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(230,0,0,0.2);
+}
+
+.btn-fav.aktif {
+  background: #fdf0f0;
+  border-color: #8B1010;
+}
+
+/* Toast */
+.toast-fav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #222;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 20px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.toast-fav.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+  background: #f8f8f8;
+  padding: 40px 60px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo img {
+  width: 35px;
+}
+
+.footer-left h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+}
+
+.footer-left span {
+  color: #e63946;
+}
+
+.footer-left p {
+  margin-top: 10px;
+  max-width: 350px;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.copy {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #666;
+}
+
+.footer-right {
+  display: flex;
+  gap: 80px;
+}
+
+.footer-right div h4 {
+  margin-bottom: 10px;
+  color: #000;
+  font-weight: 600;
+}
+
+.footer-right div a {
+  display: block;
+  color: #555;
+  text-decoration: none;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.footer-right div a:hover {
+  color: #e63946;
+}
+
+/* ══════════════════════════════
+   RESPONSIF
+══════════════════════════════ */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 16px;
+    gap: 10px;
+  }
+
+  .topbar-nav {
+    gap: 12px;
+    overflow-x: auto;
+  }
+
+  .topbar-link {
+    font-size: 12px;
+  }
+
+  .artikel {
+    padding: 30px 20px;
+  }
+
+  .artikel-content {
+    flex-direction: column;
+  }
+
+  footer {
+    padding: 30px 20px;
+  }
+
+  .footer-right {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

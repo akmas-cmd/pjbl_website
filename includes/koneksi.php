@@ -1,9 +1,4 @@
 <?php
-// ============================================================
-//  PATRIOTID — Koneksi Database
-//  File ini di-include di semua halaman yang butuh database.
-//  Letakkan file ini di folder: patriotid/includes/koneksi.php
-// ============================================================
 
 $host   = 'localhost';
 $dbname = 'patriotid_db';

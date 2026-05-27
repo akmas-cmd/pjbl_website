@@ -1,0 +1,204 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  color: #222;
+}
+
+/* ══════════════════════════════
+   HERO / KONTEN UTAMA
+══════════════════════════════ */
+.hero {
+  display: flex;
+  gap: 48px;
+  max-width: 1100px;
+  margin: 48px auto;
+  padding: 0 32px;
+  align-items: flex-start;
+}
+
+.text-section {
+  flex: 1.4;
+}
+
+.text-section h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #8B1010;
+  margin-bottom: 16px;
+}
+
+.text-section p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.text-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+  margin: 24px 0 10px;
+}
+
+/* ── TOMBOL ── */
+.btn-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.btn-back {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8B1010;
+  border: 1.5px solid #8B1010;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.btn-back:hover {
+  background: #fdf0f0;
+}
+
+.btn-nav {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: #8B1010;
+  border: 1.5px solid #8B1010;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.btn-nav:hover {
+  background: #6e0d0d;
+}
+
+.btn-fav {
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: transform 0.15s;
+}
+
+.btn-fav:hover {
+  transform: scale(1.2);
+}
+
+/* ── TOAST ── */
+.toast-fav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #222;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 20px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.toast-fav.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── IMAGE SECTION ── */
+.image-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 80px;
+}
+
+.image-section img {
+  width: 100%;
+  max-width: 340px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.no-foto {
+  width: 100%;
+  max-width: 340px;
+  height: 400px;
+  background: #e8e8e8;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.info-badge {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 340px;
+}
+
+.info-badge span {
+  background: #fdf0f0;
+  color: #8B1010;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid #f0d0d0;
+}
+
+/* ── RESPONSIF ── */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 16px;
+    gap: 10px;
+  }
+
+  .topbar-nav {
+    gap: 12px;
+    overflow-x: auto;
+  }
+
+  .topbar-link {
+    font-size: 12px;
+  }
+
+  .hero {
+    flex-direction: column;
+    margin: 24px auto;
+    padding: 0 20px;
+    gap: 28px;
+  }
+
+  .image-section {
+    position: static;
+    width: 100%;
+  }
+}

@@ -2,96 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background-color: #fffaf9;
-  color: #222;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 60px;
-  background-color: #fff;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo img {
-  width: 40px;
-}
-
-.logo h1 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #222;
-}
-
-.logo span {
-  color: #e60000;
-}
-
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-
-.navbar a:hover {
-  color: #e60000;
-}
-
-.auth-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.auth-buttons .login {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 6px 14px;
-  border-radius: 8px;
-  color: #e60000;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.auth-buttons .daftar {
-  background-color: #e60000;
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.auth-buttons .login:hover {
-  background-color: #ddd;
-}
-
-.auth-buttons .daftar:hover {
-  background-color: #b30000;
+  background: #fff;
+  color: #111;
 }
 
 .page-header {
-  background: linear-gradient(135deg, #e60000 0%, #b30000 100%);
+  background-color: #e63946;
   padding: 60px 80px 50px;
   color: #fff;
   position: relative;
@@ -166,18 +86,18 @@ body {
   cursor: pointer;
   transition: all 0.25s;
   font-family: 'Poppins', sans-serif;
+  text-decoration: none;
 }
 
 .tab-btn:hover {
-  border-color: #e60000;
-  color: #e60000;
+  border-color: #e63946;
+  color: #e63946;
 }
 
 .tab-btn.active {
-  background: #e60000;
-  border-color: #e60000;
+  background: #e63946;
+  border-color: #e63946;
   color: #fff;
-  box-shadow: 0 4px 14px rgba(230,0,0,0.25);
 }
 
 .tab-count {
@@ -204,15 +124,15 @@ body {
 .fav-card {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  border: 1px solid #e8e8e8;
   overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s;
+  transition: transform 0.25s, border-color 0.25s;
   position: relative;
 }
 
 .fav-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  border-color: #e63946;
 }
 
 .fav-card .badge {
@@ -251,21 +171,21 @@ body {
   height: 38px;
   border-radius: 50%;
   background: rgba(255,255,255,0.92);
-  border: none;
+  border: 1px solid #e8e8e8;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
   z-index: 2;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   transition: all 0.2s;
   line-height: 1;
   padding: 0;
 }
 
 .fav-card .btn-unfav:hover {
-  background: #e60000;
+  background: #e63946;
+  border-color: #e63946;
   transform: scale(1.12);
 }
 
@@ -305,7 +225,7 @@ body {
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: #e60000;
+  color: #e63946;
   text-decoration: none;
   transition: gap 0.2s;
 }
@@ -347,7 +267,7 @@ body {
 .empty-state .btn-explore {
   margin-top: 24px;
   padding: 10px 26px;
-  background: #e60000;
+  background: #e63946;
   color: #fff;
   border-radius: 30px;
   text-decoration: none;
@@ -374,7 +294,6 @@ body {
   z-index: 999;
   transition: transform 0.35s cubic-bezier(.175,.885,.32,1.275);
   white-space: nowrap;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -385,16 +304,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .navbar {
-    padding: 14px 20px;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .navbar ul {
-    display: none;
-  }
-
   .page-header {
     padding: 40px 24px 36px;
   }
